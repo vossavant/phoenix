@@ -1,0 +1,588 @@
+//
+//	QUOTEBOARD
+//	Utility Styles
+//
+
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	.flex-40 {
+		width: 40%;
+	}
+	
+	.flex-60 {
+		width: 60%;
+	}
+
+	.flex-66 {
+		width: 66.667%;
+	}
+
+	.flex-33 {
+		width: 33.334%;
+	}
+}
+
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.hidden,
+.register-location { 	// honeypot
+	display: none;
+}
+
+.left {
+	float: left !important;
+
+	& + .charcount {
+		padding: 0;
+	}
+}
+
+.searchwp-highlight {
+	background: $yellow;
+}
+
+.overlay {
+	background: transparentize($white, 0.5);
+	bottom: 0;
+	left: 0;
+	position: fixed;
+	right: 0;
+	top: $headerHeight;
+	z-index: 99;
+}
+
+.delete {
+	color: $redFave;
+}
+
+.remove-photo {
+	display: inline-block;
+	margin-top: 24px;
+}
+
+
+/** Misc Form STuff */
+
+
+// TO DO: the rest of this needs to be moved
+
+// inline errors (on join form, e.g.)
+p.error-inline {
+	background: $errorText;
+	border-radius: 2px;
+	color: $white;
+	display: none;
+	font: 13px "Roboto Medium";
+	margin: 0;
+	padding: 8px 15px;
+	position: absolute;
+	right: 7px;
+	top: -25px;
+
+	&:after {
+		border-color: $errorText transparent;
+		border-style: solid;
+		border-width: 6px 6px 0 6px;
+		bottom: -6px;
+		content: "";
+		position: absolute;
+		right: 11px;
+	}
+}
+
+	#register-form	.box-meta {
+		color: $black;
+		margin: 0 0 20px;
+		text-align: center;
+	}
+
+	#signin-options {
+		font-size: 14px;
+		margin: -15px 20px 20px;
+		overflow: auto;
+
+		a {
+			float: right;
+		}
+
+		label {
+			float: left;
+			font: 14px/22px "Roboto Regular";
+			margin: 0;
+		}
+	}
+
+// Fields with buttons in them (invite friends form)
+
+.inner-btn {
+	position: relative;
+
+	input {
+		padding-right: 116px;
+	}
+
+	.btn {
+		border-radius: 0 4px 4px 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 40px !important;
+	}
+}
+
+// to do: move this
+.invitees {
+	img {
+		float: left;
+		margin-right: 10px;
+	}
+
+	li {
+		height: $avatarSmall;
+		margin-bottom: 10px;
+
+		&.awaiting-invite img,
+		&.awaiting-invite span,
+		&.awaiting-invite .invite-email {
+			opacity: 0.65;
+		}
+
+		span {
+			display: block;
+			float: left;
+			overflow: hidden;
+			padding: 2px 0 0;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			width: 67%;
+		}
+
+		span:last-child {
+			color: $neutral;
+			font-size: 12px;
+			padding: 0;
+		}
+	}
+
+	.delete {
+		float: right;
+		margin: -10px 0 0;
+	}
+
+	.invite-email {
+		background: $neutral;
+		border-radius: 4px;
+		color: $white;
+		float: left;
+		height: $avatarSmall;
+		line-height: $avatarSmall;
+		margin: 0 10px 0 0;
+		position: static;
+		text-align: center;
+		width: $avatarSmall;
+
+		&:before {
+			font-size: 20px;
+			padding: 0;
+		}
+	}
+}
+
+.charcount {
+	padding: 10px 0 0;
+
+	&.dwindling {
+		color: $redFave;
+	}
+}
+
+
+// Form Options (show more fields)
+
+.form-options {
+	margin: -5px 0 -10px 0;
+	overflow: hidden;
+}
+
+.more-options {
+	float: left;
+	font: 12px "Roboto Medium";
+	padding: 10px 10px 10px 0;
+
+	&:hover {
+		text-decoration: none;
+
+		.ico:before {
+			color: darken($linkBlue, 20%);
+		}
+	}
+
+	.ico {
+		left: 0 !important;
+		position: relative !important;
+		top: 0;
+	}
+
+	.ico:before {
+		color: $linkBlue;
+		font-size: 12px !important;
+		padding: 0;
+		vertical-align: bottom;
+	}
+}
+
+.extra-fields {
+	margin: 20px 0 -20px;
+
+	> div {
+		margin-bottom: 20px;
+		position: relative;
+	}
+}
+
+.sso-options {
+	overflow: auto;
+	text-align: center;
+
+	span {
+		position: static;
+	}
+
+	.ico {
+		box-shadow: $boxShadow;
+		border-radius: 4px;
+		box-sizing: border-box;
+		color: $white;
+		cursor: pointer;
+		display: inline-block;
+		float: left;
+		font: 13px/36px "Roboto Medium";
+		padding: 0 12px 0 0;
+		width: 48%;
+
+		&:before {
+			float: left;
+			font: normal 16px/1 "QB Icons";
+			margin-right: 12px;
+			padding: 10px;
+		}
+
+		&:hover {
+			box-shadow: $boxShadowInset;
+		}
+
+		&.facebook {
+			@include gradient(#6178a1, #54678e);
+		}
+
+		&.facebook:before {
+			border-right: 1px solid darken(#54678e, 5%);
+		}
+
+		&.twitter {
+			@include gradient(#4eb3cf, #43a6c6);
+			box-shadow: none;
+			float: right;
+			opacity: 0.5;
+		}
+
+		&.twitter:before {
+			border-right: 1px solid darken(#43a6c6, 5%);
+		}
+
+		&.twitter:hover {
+			box-shadow: none;
+			cursor: default;
+		}
+	}
+}
+
+
+/** Icons */
+
+// Icons
+
+.ico {
+	@include transition(color, ease-in-out, 0.1s);
+	color: $grayIcon;
+	font: normal 16px/1 "QB Icons";
+	font-style: normal;
+	font-variant: normal;
+	opacity: 1;
+	left: 16px;
+	position: absolute;
+	top: 0;
+	text-transform: none;
+
+	// better font rendering
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+
+	&:before {
+		font-size: 48px;
+		padding: 10px 0 0 16px;
+	}
+	
+
+	// Social Media
+
+	&.social {
+		font-size: 0;
+	}
+
+
+	// Loading
+
+	&.loading {
+
+		&:before {
+			color: transparent !important;
+			background: url('../images/loading.gif') 0 4px no-repeat;
+		}
+	}
+
+
+	// Error & Success States
+
+	&.error {
+		color: $errorText;
+	}
+
+	&.success:before {
+		color: $successText;
+		content: "\e607" !important;
+	}
+
+
+	// Icons
+
+	&.arrow-down:before {
+		content: "\e60f";
+	}
+
+	&.arrow-up:before {
+		content: "\e614";
+	}
+
+	&.boards:before {
+		content: "\e60e";
+	}
+
+	&.close:before {
+		content: "\e615";
+	}
+
+	&.close:hover {
+		box-shadow: 0 0 15px transparentize($black, 0.85);
+		border-radius: 50%;
+	
+		&:before {
+			color: $redFave;
+		}
+	}
+
+	&.collab {
+		display: block;
+		transform: rotate(180deg);
+	}
+	&.collab:before {
+		content: "\e618";
+		font-size: 32px !important;
+	}
+
+	&.comment:before {
+		content: "\e605";
+	}
+
+	&.earth:before {
+		content: "\e616";
+	}
+
+	&.email:before {
+		content: "\e600";
+	}
+
+	&.facebook:before {
+		content: "\e611";
+	}
+
+	&.fave:before {
+		content: "\e604";
+	}
+
+	&.faved {
+		margin-left: 34px;
+
+		&:before {
+			color: $redFave;
+		}
+	}
+
+	&.follow:before {
+		content: "\e609";
+		font-size: 32px !important;
+	}
+
+	//&.follow span,
+	//&.following span {
+	//	left: 35px;
+	//	top: -8px;
+	//}
+
+	&.following:hover:before {
+		color: $redFave;
+	}
+	
+	&.following:before,
+	&.collaborating:before {
+		color: $linkBlue;
+	}
+
+	&.home:before {
+		content: "\e603";
+	}
+
+	&.instagram:before {
+		content: "\e613";
+	}
+
+	&.lock:before {
+		content: "\e608";
+	}
+
+	&.more:before {
+		content: "\e60b";
+	}
+
+	&.pencil:before {
+		content: "\e601";
+	}
+
+	&.pinterest:before {
+		content: "\e612";
+	}
+
+	&.quote:before {
+		content: "\e60d";
+	}
+
+	&.search:before {
+		content: "\e606";
+	}
+
+	&.tag:before {
+		content: "\e607";
+	}
+
+	&.twitter:before {
+		content: "\e610";
+	}
+
+	&.user:before {
+		content: "\e602";
+	}
+
+	&.users:before {
+		content: "\e60c";
+	}
+
+	span {
+		color: $black;
+		font: 16px "Roboto Regular", sans-serif;
+		left: 30px;
+		position: absolute;
+		top: -5px;
+	}
+}
+
+button.ico {
+	background: none;
+	border: 0;
+	font-size: 0;
+}
+
+form .ico {
+	left: auto;
+	right: 15px;
+	top: 18px;
+
+	&:before {
+		font-size: 16px;
+	}
+}
+
+
+// tooltip
+
+.introjs-tooltip {
+	min-width: 300px !important;
+	
+	h4 {
+		font: 18px "Roboto Medium";
+		margin: 0 0 1em;
+	}
+}
+
+
+// pagination, lazy loader
+
+.pagination {
+	display: none;
+}
+
+#lazyloader {
+	background: url('../images/loading.gif') center no-repeat;
+	display: none;
+	height: 16px;
+}
+
+
+// random column STuff for board invite form
+
+/*
+.board-invite {
+	form > {
+		div:last-child {
+			clear: both;
+			padding-bottom: 20px;
+			text-align: right;
+		}
+
+		div:last-child button {
+			width: auto;
+		}
+
+		h2 {
+			margin-bottom: 0;
+		}
+	}
+
+	h4 {
+		font: 18px "Roboto Medium";
+		margin: 0 0 1em;
+	}
+
+	.col {
+		border-right: 1px solid darken($white, 10%);
+		box-sizing: border-box;
+		float: left;
+		margin: 0 !important;
+		width: 50%;
+
+		& + .col {
+			border: 0;
+		}
+	}
+}
+*/

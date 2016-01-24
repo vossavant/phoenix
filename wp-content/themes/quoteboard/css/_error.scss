@@ -1,0 +1,19 @@
+//
+//	QUOTEBOARD
+//	404 Error Page Styles
+//
+
+.error404 {
+	h1 {
+		font-size: 34px;
+	}
+
+	.main {
+		text-align: center;
+	}
+
+	p {
+		border-bottom: 1px solid darken($white, 15%);
+		padding-bottom: 1.5em;
+	}
+}

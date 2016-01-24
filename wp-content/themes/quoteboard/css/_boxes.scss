@@ -1,0 +1,396 @@
+//
+//	QUOTEBOARD
+//	Quote Bubble Styles
+//
+
+
+/** General Box Styles */
+
+.box {
+	min-height: 80px;
+	padding: 0 0 0 80px;
+	position: relative;
+
+
+	// Outer Wrapper for Vertically Centering Side Menu Options
+
+	> div {
+		margin: 0 0 20px;
+		width: 100%;
+
+		menu {
+			position: absolute;
+			right: 30px;
+			text-align: center;
+			top: 30px;
+		}
+	}
+
+	footer {
+		border-top: 1px solid $grayBody;
+		clear: both;
+		line-height: 40px;
+		margin: 30px -30px -30px;
+		padding: 0 15px;
+
+		a {
+			display: inline-block;
+			font: 16px/40px "Roboto Medium";
+			padding: 0 15px;
+			text-transform: uppercase;
+		}
+
+		a.delete {
+			color: $redFave;
+		}
+
+		.private {
+			color: $neutral;
+			cursor: help;
+			font-size: 14px;
+			position: absolute;
+			right: 30px;
+		}
+		.private:before {
+			content: "\e608";
+			font: normal 12px/1 "QB Icons";
+			padding-right: 5px;
+		}
+	}
+
+	h4 {
+		color: $black;
+		float: left;
+		font: normal 20px "Roboto Medium";
+		margin: 0 0 1em;
+
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 450px;
+
+		& + ul {
+			margin-top: -10px;
+		}
+
+		span {
+			color: $grayHandle;
+			font: 12px "Roboto Regular";
+			padding-left: 5px;
+		}
+
+		span.searchwp-highlight {
+			color: $black;
+			font: 20px "Roboto Medium";
+			padding: 0;
+		}
+	}
+
+	li {
+		display: inline;
+	}
+
+	p {
+		clear: both;
+		line-height: 24px;
+
+		em {
+			color: $neutral;
+		}
+	}
+
+	ul {
+		float: left;
+		width: 100%;
+	}
+
+
+	// Avatar
+
+	.avatar img {
+		box-shadow: $bubbleShadow;
+		left: 0;
+		position: absolute;
+		top: 0;
+	}
+
+
+	// Add Comment/Quote Box & Form
+
+	&.small {
+		button {
+			border-radius: 4px;
+			box-shadow: none;
+			display: none;
+			margin: 20px 0 0;
+			width: 100%;
+		}
+
+		p {
+			margin: 0;
+		}
+
+		textarea {
+			box-shadow: $boxShadowInset;
+			overflow: hidden;
+			padding: 10px 16px;
+			height: 40px;
+
+			&[required]::-webkit-input-placeholder:after {
+				content: "";
+			}
+		}
+
+		.avatar img {
+			left: 12px;
+		}
+
+		.bubble {
+			padding: 20px;
+			position: relative;
+		}
+
+		.bubble:before {
+			@include transition(border-color, ease-in-out, 0.1s);
+			border-bottom: 11px solid transparent;
+			border-right: 10px $white solid;
+			content: "";
+			left: -10px;
+			position: absolute;
+			top: 24px;
+		}
+
+		.bubble:hover {
+			background: $white;
+			cursor: default;
+		}
+
+		.form-options {
+			display: none;
+		}
+
+		.ico {
+			left: auto;
+			position: absolute;
+		}
+
+		.ico:before {
+			font-size: 16px;
+		}
+	}
+
+
+	// Icons
+
+	.ico {
+		left: 0;
+		position: relative;
+
+		&:before {
+			font-size: 20px;
+			padding: 0;
+		}
+
+		&:hover {
+			color: darken($grayIcon, 15%);
+			cursor: pointer;
+		}
+	}
+}
+
+
+/** Bubble Wrapper (White, Rounded Box) */
+
+.bubble {
+	background: $white;
+	border-radius: 4px;
+	box-shadow: $bubbleShadow;
+	box-sizing: border-box;
+	padding: 30px;
+
+	&:before,
+	&:after {
+		content: " ";
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+
+	&:hover {
+		background: $info; // or #d4edfa
+		cursor: pointer;
+	}
+}
+
+
+/** Time Since Posted, Comment Count */
+
+.box-meta {
+	color: $grayHandle;
+	float: right;
+	font-size: 12px;
+}
+
+
+/** Quote Box Styles */
+
+.box.quote {
+	time {
+		@extend .box-meta;
+	}
+
+	&.new .bubble {
+		background: #beffc3;
+
+		&:before {
+			border-right-color: #beffc3;
+		}
+	}
+
+	.status {
+		color: $black;
+		font: 16px/18px "QB Icons";
+		padding: 0 3px 0 0;
+
+		&.private:before {
+			content: "\e608";
+		}
+	}
+
+
+	// Inner Wrapper for Displaying Quote Bubble
+	
+	> div > div {
+		@include transition(background, ease-in-out, 0.1s);
+		@extend .bubble;
+		position: relative;
+
+		&:before {
+			@include transition(border-color, ease-in-out, 0.1s);
+			border-bottom: 11px solid transparent;
+			border-right: 10px $white solid;
+			content: "";
+			left: -10px;
+			position: absolute;
+			top: 35px;
+		}
+
+		&:hover:before {
+			border-right-color: $info; // or #d4edfa
+		}
+	}
+}
+
+
+/** Board Box Styles */
+
+.box.board {
+	.avatar:before {
+		background: $white;
+		border-radius: 0 0 4px 0;
+		font: normal 14px/18px "QB Icons";
+		height: 18px;
+		left: 0;
+		position: absolute;
+		text-align: center;
+		top: 0;
+		width: 18px;
+		z-index: 1;
+	}
+
+	&.private .avatar:before {
+		color: $black;
+		content: "\e608";
+	}
+
+	&.public .avatar:before {
+		color: $qbPurple;
+		content: "\e60c";
+	}
+
+	// not in use yet
+	// &.official .avatar:before {
+	// 	color: red;
+	// 	content: "\e617";
+	// }
+
+	&.default {
+		menu {
+			display: none;
+		}
+		
+		// .bubble {
+		// 	width: 100%;
+		// }
+	}
+}
+
+
+/** Tag Box Styles */
+
+.box.tag {
+	ul {
+		color: $grayIcon;
+	}
+}
+
+
+/** Board Box Styles */
+
+.box.boards,
+.box.faves {
+	img {
+		float: left;
+		margin-right: 10px;
+	}
+
+	li {
+		float: left;
+		line-height: 48px;
+		margin-top: 10px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		width: 50%;
+	}
+}
+
+
+/** Special Styles */
+
+// no need to have hover styles on single quote page
+.single-quote {
+	.bubble:hover {
+		background: $white;
+		cursor: default;
+	}
+
+	.bubble:hover:before {
+		border-right-color: $white;
+	}
+
+	.box menu {
+		left: 0px;
+		right: auto;
+		top: 80px;
+		width: 60px;
+	}
+
+	.box .ico:before {
+		font-size: 24px;
+	}
+
+	q p {
+		font-size: 24px;
+		line-height: 1.25;
+	}
+}
+
+// push edit/delete footer down
+cite + .box-meta {
+	display: block;
+	float: none;
+	text-align: right;
+}

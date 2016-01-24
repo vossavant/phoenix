@@ -1,0 +1,42 @@
+//
+//	QUOTEBOARD
+//	Footer Styles
+//
+
+body > footer {
+	background: $qbPurple;
+	padding: 80px 0;
+	text-align: center;
+
+	li {
+		display: inline-block;
+
+		a {
+			display: inline-block;
+			color: lighten($qbPurple, 25%);
+			padding: 10px;
+
+			&:hover {
+				color: lighten($qbPurple, 50%);
+			}
+		}
+	}
+
+	p {
+		color: lighten($qbPurple, 20%);
+		font-size: 12px;
+		margin: 0;
+	}
+
+	q {
+		background: url(../images/logo.svg) center top no-repeat;
+		background-size: 150px;
+		color: lighten($qbPurple, 60%);
+		font: italic 16px Georgia, serif;
+		padding-top: 40px;
+	}
+
+	ul {
+		margin: 30px 0 0;
+	}
+}

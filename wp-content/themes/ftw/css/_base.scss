@@ -1,0 +1,220 @@
+//
+//	QUOTEBOARD
+//	Base styles
+//
+
+
+/** General Selectors */
+
+a {
+	color: $linkBlue;
+	text-decoration: none;
+	
+	&:hover {
+		color: darken($linkBlue, 20%);
+		text-decoration: underline;
+	}
+}
+
+body {
+	background: $grayBody;
+	color: $black;
+	font: 16px "Roboto Regular", sans-serif;
+	height: 100%;
+	margin: 0;
+}
+
+button {
+	width: 100%;
+}
+
+cite {
+	color: $black;
+	display: block;
+	font: normal 20px "Roboto Medium";
+	margin: 1em 0 0;
+	text-align: right;
+}
+
+em,
+i {
+}
+
+h1, h2, h3, h4 {
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 56px;
+}
+
+h2 {
+	font-size: 45px;
+}
+
+h3 {
+	font-size: 34px;
+}
+
+h4 {
+	font-size: 24px;
+}
+
+html {
+	height: 100%;
+}
+
+img {
+	border-radius: 4px;
+}
+
+main {
+	margin: 0 auto 40px;
+	min-height: 300px;
+	width: $mainWidth;
+
+	&.wide {
+		width: $pageWidth;
+	}
+
+	&.extra.wide {
+		width: 1200px;
+	}
+
+	h2:first-child,
+	h3:first-child {
+		margin-top: 0.5em;
+	}
+
+	input[type="text"]:focus,
+	textarea:focus {
+		background: $white;
+	}
+}
+
+menu {
+	margin: 0;
+	padding: 0;
+}
+
+p {
+	line-height: 28px;
+	margin-bottom: 1.75em;
+}
+
+q {
+	clear: both;
+	display: block;
+	line-height: 24px;
+
+	&:before,
+	&:after {
+		content: "";
+	}
+
+	i {
+		display: none;
+	}
+
+	p {
+		margin: 0;
+	}
+}
+
+strong, b {
+	font-family: "Roboto Medium";
+	font-weight: normal;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+
+/** Form Selectors */
+
+form > div {
+	margin: 0 0 40px;
+	position: relative;
+}
+
+input,
+textarea {
+	background: $offWhite;
+	border: 0;
+	border-radius: 4px;
+	box-shadow: $boxShadowInset;
+	box-sizing: border-box;
+	color: $black;
+	font: 16px "Roboto Regular", sans-serif;
+	margin: 0;
+	padding: 16px;
+	width: 100%;
+
+	&:focus + .ico {
+		color: darken($grayIcon, 25%);
+	}
+
+	&:focus + .ico.error {
+		color: $errorText;
+	}
+
+	&[type="checkbox"] {
+		float: left;
+		margin: 4px 5px 0 0;
+		width: auto;
+	}
+
+	&[type="file"] {
+		background: none;
+		box-shadow: none;
+		float: left;
+		font-size: inherit;
+		padding: 24px 0 0 0;
+		width: auto;
+	}
+
+	&[type="submit"] {
+		padding: 17px 20px;
+	}
+
+	&[required]::-webkit-input-placeholder:after {
+		color: transparentize($redFave, 0.5);
+		content: "Required";
+		font-size: 12px;
+		position: absolute;
+		right: 40px;
+		top: 18px;
+		text-transform: uppercase;
+	}
+
+	&.error {
+		border-color: $errorBorder;
+		background: $error;
+	}
+
+	&.success {
+		border-color: $successBorder;
+		background: $success;
+	}
+}
+
+label {
+	display: block;
+	font: 18px "Roboto Medium";
+	margin: 0 0 5px;
+}
+
+textarea {
+	clear: both;
+	display: block;
+	font: 16px "Roboto Regular";
+	height: 180px;
+	resize: none;
+
+	&[required]::-webkit-input-placeholder:after {
+		right: 20px;
+	}
+}

@@ -1,0 +1,36 @@
+//
+//	QUOTEBOARD
+//	Comment Styles
+//
+
+#comment-list {
+	img {
+		float: left;
+		margin-right: 10px;
+	}
+
+	li {
+		display: block;
+		margin-bottom: 40px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	p {
+		clear: both;
+		margin: 0 0 1em;
+		padding: 1em 0 0;
+	}
+
+	time {
+		@extend .box-meta;
+		display: block;
+		float: none;
+	}
+}
+
+#comment-form .message {
+	margin-bottom: 20px;
+}

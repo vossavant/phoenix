@@ -1,0 +1,38 @@
+//
+//	QUOTEBOARD
+//	Static Page Styles
+//
+
+.page {
+
+}
+
+#page-wrapper {
+	h1 {
+		font-size: 45px;
+		margin: 0.5em 0 0;
+	}
+
+	h2, h3 {
+		font-size: 34px;
+		margin: 1em 0 0;
+	}
+
+	h3 {
+		font-size: 24px;
+	}
+
+	p + ul {
+		margin-top: -0.25em;
+	}
+
+	li {
+		line-height: 28px;
+	}
+
+	ul {
+		list-style: inherit;
+		margin: 1em 0 1.75em;
+		padding-left: 40px;
+	}
+}
