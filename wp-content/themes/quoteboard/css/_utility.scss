@@ -44,6 +44,10 @@
 	display: none;
 }
 
+.right {
+	float: right;
+}
+
 .left {
 	float: left !important;
 
@@ -536,14 +540,36 @@ form .ico {
 // pagination, lazy loader
 
 .pagination {
-	display: none;
+	border-top: 1px solid $grayIcon;
+	margin: 20px 0 0 80px; 	// margin-left matches avatar width on archives view
+	padding: 20px 0;
+	text-align: center;
+
+	&:empty {
+		border: 0;
+		margin: 0;
+		padding: 0;
+	}
+
+	.page-numbers {
+		padding: 9px 16px;
+	}
+
+	.dots {
+		color: $grayHandle;
+		padding: 9px 15px;
+	}
+
+	.current {
+		font-weight: bold;
+	}
 }
 
-#lazyloader {
-	background: url('../images/loading.gif') center no-repeat;
-	display: none;
-	height: 16px;
-}
+// #lazyloader {
+// 	background: url('../images/loading.gif') center no-repeat;
+// 	display: none;
+// 	height: 16px;
+// }
 
 
 // random column STuff for board invite form

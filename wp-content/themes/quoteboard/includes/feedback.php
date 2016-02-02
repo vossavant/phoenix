@@ -48,7 +48,15 @@ $result[] = mandrill_sendmail( $email_html, $email_text, $email_subject, $email_
 
 // if an exception was thrown, try sending with PHP mail
 if ( $result[0]['mandrill_error'] ) {
-	mail( $email_to, 'Beta Tester Feedback', $feedback, 'From: noreply@quoteboard.com' );
+	if ( mail( $email_to, 'Beta Tester Feedback', $feedback, 'From: noreply@quoteboard.com' ) ) {
+		echo json_encode(
+			array(
+				'result' => 'sent'
+			)
+		);
+
+		exit;
+	}
 }
 
 // return result for jQuery goodness

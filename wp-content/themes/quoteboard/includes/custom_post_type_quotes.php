@@ -34,7 +34,7 @@ function register_cpt_quotes() {
         'has_archive' => true,
         'query_var' => true,
         'can_export' => true,
-        'rewrite' => true,
+        'rewrite' => array( 'slug' => 'quotes', 'with_front' => false ),    // lets us set the archive page to /quotes/ but keep singular quotes at /quote/[quote_id]
         'capability_type' => 'post'
     );
 

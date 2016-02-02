@@ -37,11 +37,8 @@ if ( have_posts() ) :
 		// grab URL endpoint (that is, the final segment in the URL)
 		$url_endpoint	= url_segment( 3 ); // TO DO: change to 3 on live site
 
-		// grab a list of board members
-		$members 		= get_field( 'board_members' ); 
-
 		// default: user is not a member of this board
-		$is_member		= false;
+		// $is_member		= false;
 
 		// get board author ID
 		$board_author	= get_the_author_meta( 'id' );
@@ -57,44 +54,6 @@ if ( have_posts() ) :
 		} else {
 			$current_user_is_board_author = false;
 		}
-
-		// determine if current user is a member of this board
-		foreach ( $members as $member ) {
-			if ( $member['board_members_user']['ID'] == $current_user->ID ) {
-				$is_member = true;
-
-				if ( $member['can_collaborate'] == 'y' ) {
-					$can_collaborate = true;
-				}
-
-				break;
-			}
-		}
-
-		/*
-		 *	Grab quotes related to (on) the current board
-		 *	we store the results here so we can count them (for the #quotes stat)
-		 *	and then use the query later. this is better than running a query here
-		 *	simply to count the quotes, and then running the same query again later
-		 *	in the template to show the quotes
-		 */
-		$quotes = get_posts(
-			array (
-				'posts_per_page'=> -1,
-				'post_status'	=> ( $current_user_is_board_author && $post->post_status == 'private' ? array( 'private', 'publish' ) : 'publish' ),
-				'post_type'		=> 'quote',
-				'meta_query'	=> array (
-					array (
-						'key' 	=> 'quote_board',
-						'value' => $board_id
-					)
-				)
-			)
-		);
-
-		// board profile
-		$board_quote_count 	= count( $quotes );
-		$board_member_count = count( get_field( 'board_members' ) );
 
 		if ( has_post_thumbnail() ) {
 			$board_thumbnail	= wp_get_attachment_image_src( get_post_thumbnail_id(), 'thumbnail' );
@@ -137,19 +96,44 @@ elseif ( isset( $wp_query->query_vars['profile'] ) ) {
 
 				}
 
-				// show "add quote" option to board members
-				if ( $can_collaborate ) {
-					$inline_form_placeholder = 'Add a quote to this board...';
-					// include( TEMPLATEPATH . '/forms/add-quote-inline.php' );
-				}
-
 				// admins can see private boards by default, but we hid the quotes from them, so show a helpful note
 				if ( $post->post_status == 'private' && !$current_user_is_board_author ) {
 					echo '<p class="message warning shown"><strong>This is a private board.</strong> You cannot view quotes on a private board, even as an admin.</p>';
 				}
 
+				/*
+				 *	Grab quotes related to (on) the current board
+				 *	we store the results here so we can count them (for the #quotes stat)
+				 *	and then use the query later. this is better than running a query here
+				 *	simply to count the quotes, and then running the same query again later
+				 *	in the template to show the quotes
+				 */
+
+				$paged = ( get_query_var('paged') ? get_query_var('paged') : 1 );
+				
+				$quotes = new WP_Query(
+					array (
+						'paged'			=> $paged,
+						'posts_per_page'=> RESULTS_PER_PAGE,
+						'post_status'	=> ( $current_user_is_board_author && $post->post_status == 'private' ? array( 'private', 'publish' ) : 'publish' ),
+						'post_type'		=> 'quote',
+						'meta_query'	=> array (
+							array (
+								'key' 	=> 'quote_board',
+								'value' => $board_id
+							)
+						)
+					)
+				);
+
+				// echo 'Page: ' . $paged;
+				// echo '<br>Found Posts: ' . $quotes->found_posts;
+				// echo '<br>Max Pages: ' . $quotes->max_num_pages;	// found by dividing found posts by 10 (default posts per page)
+				// echo '<br>Offset: ' . ($paged - 1) * RESULTS_PER_PAGE;
+
 				// show board quotes
 				include( TEMPLATEPATH . '/loop-quotes.php' );
+				wp_reset_postdata();
 			echo 
 			'</div>
 			

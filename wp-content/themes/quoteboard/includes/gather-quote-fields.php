@@ -104,7 +104,7 @@ if ( !empty( $quote_source ) ) {
 		$source_slug	= sanitize_title( $source_title );
 
 		$insert_parameters = array (
-			'post_author'	=> $current_user_id,
+			'post_author'	=> $quote_attributed_to_id,
 			'post_name'		=> $source_slug,
 			'post_status'	=> 'publish',
 			'post_title'	=> $source_title,

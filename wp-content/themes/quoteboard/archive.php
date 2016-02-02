@@ -1,7 +1,7 @@
 <?php
 /*
  *	QUOTEBOARD
- *	Quote Archives Template (presently, only set up for tags)
+ *	Archives Template
  */
 
 include( TEMPLATEPATH . '/header.php' );
@@ -16,13 +16,22 @@ echo '
 		endif;
 		echo '
 	</h3>';
+	// probably better to just use WP_Query and not mess with this crap
+// $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 0;
+$paged = ( get_query_var('paged') ? get_query_var('paged') : 0 );
+	echo 'Page: ' . $paged;
+	echo '<br>Found Posts: ' . $wp_query->found_posts;
+	echo '<br>Max Pages: ' . $wp_query->max_num_pages;	// found by dividing found posts by 10 (default posts per page)
+	echo '<br>Offset: ' . ($paged - 1) * RESULTS_PER_PAGE;
 
 	$quotes = get_posts(
 		array(
-			'posts_per_page'=> -1,
+			'paged' => $paged,
+			'posts_per_page'=> RESULTS_PER_PAGE,
 			'post_status'	=> 'publish',
 			'post_type' 	=> 'quote',
-			'tag'			=> $url_endpoint
+			'offset' 		=> ( $paged - 1 ) * RESULTS_PER_PAGE
+			// 'tag'			=> $url_endpoint
 		)
 	);
 

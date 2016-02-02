@@ -2219,7 +2219,8 @@
 				status = 'error';
 			}
 
-			if ( status === 'sent' ) {
+			// if ( status === 'sent' ) {
+			if (status !== 'error') {
 				form.find('.message.success').slideDown();
 			} else {
 				form.find('.message.error').slideDown();

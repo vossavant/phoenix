@@ -32,7 +32,7 @@ echo
 if ( $curated_boards = get_field( 'curated_boards', 'option' ) ) :
 	echo 
 	'<section class="main extra wide">
-		<h3>Boards We Like</h3>
+		<h3>Boards We Like <span><a href="' . home_url() . '/boards">See More Boards &raquo;</a></span></h3>
 		<div class="flex curated boards">';
 
 		foreach ( $curated_boards as $key => $board ) :
@@ -75,19 +75,26 @@ echo
 			<div class="flex-child flex-60">
 				<h3>Latest Quotes</h3>';
 
-				$paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-				$quotes = get_posts(
+				$quotes = new WP_Query(
 					array(
-						'paged' 			=> $paged,
-						'posts_per_page'	=> 10, //RESULTS_PER_PAGE,
+						'posts_per_page'	=> 10,
+						'post_status'		=> 'publish',
 						'post_type' 		=> 'quote'
 					)
 				);
 
+				// $quotes = new WP_Query(
+				// 	array(
+				// 		'posts_per_page'	=> 10, //RESULTS_PER_PAGE,
+				// 		'post_type' 		=> 'quote'
+				// 	)
+				// );
+
 				include( TEMPLATEPATH . '/loop-quotes.php' );
 				
 				echo
-			'</div>
+				'<a class="btn right" href="' . home_url() . '/quotes">More Quotes &raquo;</a>
+			</div>
 
 			<div class="flex-child flex-40">
 				<h3 style="margin-left: 30px;">Notable Quoters</h3>';

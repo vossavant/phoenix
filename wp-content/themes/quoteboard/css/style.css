@@ -59,6 +59,9 @@
 .register-location {
   display: none; }
 
+.right {
+  float: right; }
+
 .left {
   float: left !important; }
   .left + .charcount {
@@ -104,7 +107,7 @@ p.error-inline {
     position: absolute;
     right: 11px; }
 
-#register-form .box-meta, #register-form .box.quote time, .box.quote #register-form time, #register-form #comment-list time, #comment-list #register-form time {
+#register-form .box-meta, #register-form .box.quote time, .box.quote #register-form time, #register-form #comment-list time, #comment-list #register-form time, #register-form .archive h3 span, .archive h3 #register-form span {
   color: #0f0f0f;
   margin: 0 0 20px;
   text-align: center; }
@@ -362,12 +365,21 @@ form .ico {
     margin: 0 0 1em; }
 
 .pagination {
-  display: none; }
-
-#lazyloader {
-  background: url("../images/loading.gif") center no-repeat;
-  display: none;
-  height: 16px; }
+  border-top: 1px solid #c7c7c7;
+  margin: 20px 0 0 80px;
+  padding: 20px 0;
+  text-align: center; }
+  .pagination:empty {
+    border: 0;
+    margin: 0;
+    padding: 0; }
+  .pagination .page-numbers {
+    padding: 9px 16px; }
+  .pagination .dots {
+    color: #828282;
+    padding: 9px 15px; }
+  .pagination .current {
+    font-weight: bold; }
 
 /*
 .board-invite {
@@ -571,6 +583,10 @@ textarea {
 
 .home h3 {
   margin-top: 2em; }
+  .home h3 span {
+    float: right;
+    font-size: 16px;
+    margin-top: 17px; }
 .home header {
   background: none; }
   .home header form,
@@ -1208,7 +1224,7 @@ body > footer {
     cursor: pointer; }
 
 /** Time Since Posted, Comment Count */
-.box-meta, .box.quote time, #comment-list time {
+.box-meta, .box.quote time, #comment-list time, .archive h3 span {
   color: #828282;
   float: right;
   font-size: 12px; }
@@ -1241,25 +1257,40 @@ body > footer {
     border-right-color: #d9edf7; }
 
 /** Board Box Styles */
-.box.board .avatar:before {
-  background: #ffffff;
-  border-radius: 0 0 4px 0;
-  font: normal 14px/18px "QB Icons";
-  height: 18px;
-  left: 0;
-  position: absolute;
-  text-align: center;
-  top: 0;
-  width: 18px;
-  z-index: 1; }
-.box.board.private .avatar:before {
-  color: #0f0f0f;
-  content: "\e608"; }
-.box.board.public .avatar:before {
-  color: #4c1b2f;
-  content: "\e60c"; }
-.box.board.default menu {
-  display: none; }
+.box.board {
+  padding: 0; }
+  .box.board .avatar:before {
+    background: #ffffff;
+    border-radius: 0 0 4px 0;
+    font: normal 14px/18px "QB Icons";
+    height: 18px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 18px;
+    z-index: 1; }
+  .box.board.private .avatar:before {
+    color: #0f0f0f;
+    content: "\e608"; }
+  .box.board.public .avatar:before {
+    color: #4c1b2f;
+    content: "\e60c"; }
+  .box.board.default menu {
+    display: none; }
+  .box.board h4 {
+    float: none;
+    width: 100%; }
+  .box.board img {
+    border-radius: 4px 0 0 4px;
+    box-shadow: none;
+    float: left;
+    position: static; }
+  .box.board p {
+    clear: none; }
+  .box.board .bubble, .box.board .box.quote > div > div {
+    padding-bottom: 0;
+    padding-left: 170px; }
 
 /** Tag Box Styles */
 .box.tag ul {
@@ -1297,7 +1328,7 @@ body > footer {
   font-size: 24px;
   line-height: 1.25; }
 
-cite + .box-meta, .box.quote cite + time, #comment-list cite + time {
+cite + .box-meta, .box.quote cite + time, #comment-list cite + time, .archive h3 cite + span {
   display: block;
   float: none;
   text-align: right; }
@@ -1401,10 +1432,11 @@ cite + .box-meta, .box.quote cite + time, #comment-list cite + time {
     .profile .cover h3,
     .profile .cover p {
       margin: 0; }
+    .profile .cover h3 {
+      line-height: 1.2; }
     .profile .cover h3 span {
       display: block;
       font-size: 14px;
-      margin-bottom: -5px;
       opacity: 0.82; }
     .profile .cover img {
       border-radius: 4px 0px 0px;
@@ -1520,6 +1552,12 @@ ul.tabnav {
   height: 48px;
   margin: 0 20px 0 0;
   width: 48px; }
+
+.archive h3 span {
+  margin-top: 20px; }
+
+.post-type-archive-board .pagination {
+  margin-left: 0; }
 
 #page-wrapper h1 {
   font-size: 45px;
@@ -2253,10 +2291,13 @@ ul.tabnav {
       color: #ffffff;
       cursor: pointer; }
 
+.error404 footer p {
+  border: 0;
+  padding-bottom: 0; }
 .error404 h1 {
   font-size: 34px; }
-.error404 .main {
-  text-align: center; }
 .error404 p {
   border-bottom: 1px solid #d9d9d9;
   padding-bottom: 1.5em; }
+.error404 .main {
+  text-align: center; }

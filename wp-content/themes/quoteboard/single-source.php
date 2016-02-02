@@ -16,7 +16,7 @@ echo
 	<div class="flex">
 		<div class="flex-60">';
 
-			$quotes = get_posts(
+			$quotes = new WP_Query(
 				array(
 					'meta_query' => array(
 						array(
@@ -24,13 +24,15 @@ echo
 							'value'	=> $post->ID
 						)
 					),
-					'posts_per_page'	=> -1,
+					'posts_per_page'=> RESULTS_PER_PAGE,
 					'post_status'	=> 'publish',
 					'post_type' 	=> 'quote'
 				)
 			);
 
 			include( TEMPLATEPATH . '/loop-quotes.php' );
+
+			wp_reset_postdata();
 
 			echo
 		'</div>

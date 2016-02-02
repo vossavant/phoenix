@@ -3,8 +3,15 @@
 //	Static Page Styles
 //
 
-.page {
+.archive {
+	h3 span {
+		@extend .box-meta;
+		margin-top: 20px;
+	}
+}
 
+.post-type-archive-board .pagination {
+	margin-left: 0;
 }
 
 #page-wrapper {

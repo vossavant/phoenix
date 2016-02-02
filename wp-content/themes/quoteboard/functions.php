@@ -34,7 +34,7 @@ define( MINIMUM_PASSWORD_LENGTH, 6 );
 define( MINIMUM_USERNAME_LENGTH, 4 );
 define( TIMTHUMB_PATH, get_bloginfo( 'template_url' ) . '/includes/timthumb.php?src=' );
 define( TERMS_PAGE_ID, 74);
-define( RESULTS_PER_PAGE, 25);
+define( RESULTS_PER_PAGE, 20);
 define( GOOGLE_CSE_ID, '010552372868030502357:om3c3sh6jmw' );
 define( GOOGLE_API_KEY, 'AIzaSyDF4c90Y32LWHCTsO5OAWxhgm5wYCF-GOA' );
 
@@ -141,7 +141,7 @@ function qb_enqueue_scripts() {
 	wp_enqueue_script( 'form', get_template_directory_uri() . '/js/form.js', array( 'jquery' ), null, true );
 	wp_enqueue_script( 'timeago', get_template_directory_uri() . '/js/timeago.js', array( 'jquery' ), null, true );
 	wp_enqueue_script( 'load', get_template_directory_uri() . '/js/load.js', array( 'jquery' ), null, true );
-	wp_enqueue_script( 'utility', get_template_directory_uri() . '/js/utility.js', array( 'load' ), '0.0.3', true );
+	wp_enqueue_script( 'utility', get_template_directory_uri() . '/js/utility.js', array( 'load' ), '0.0.4', true );
 	// TO DO: load final.min.js instead (ajax may depend on the name "utility" above)
 
 	// load tutorial script on welcome page
@@ -501,17 +501,48 @@ function qb_paginate() {
     global $wp_query, $wp_rewrite;
     $wp_query->query_vars['paged'] > 1 ? $current = $wp_query->query_vars['paged'] : $current = 1;
     $pagination = array(
-        'base' => @add_query_arg('page','%#%'),
-        'format' => '',
-        'total' => $wp_query->max_num_pages,
-        'current' => $current,
-        'show_all' => true,
-        'type' => 'plain'
+        // 'base' => @add_query_arg('page','%#%'),
+        // 'format' => '',
+        'total' 	=> $wp_query->max_num_pages,
+        'current' 	=> $current,
+        'show_all' 	=> false,
+        'type' 		=> 'plain'
     );
     if ( $wp_rewrite->using_permalinks() ) $pagination['base'] = user_trailingslashit( trailingslashit( remove_query_arg( 's', get_pagenum_link( 1 ) ) ) . 'page/%#%/', 'paged' );
     if ( !empty($wp_query->query_vars['s']) ) $pagination['add_args'] = array( 's' => get_query_var( 's' ) );
-    echo paginate_links( $pagination );
+    
+    echo '<div class="pagination">' . paginate_links( $pagination ) . '</div>';
 }
+
+
+/**
+ * 	Modifies the main query to only count published posts (e.g., quotes)
+ *	Otherwise, pagination is off since it counts all posts, which results
+ *	in extra pages being shown.
+ */
+function qb_only_show_public_in_archives( $query ) {
+	if ( $query->is_main_query() && $query->is_post_type_archive()  ) {
+		$query->set( 'post_status', 'publish' );
+	}
+}
+add_action( 'pre_get_posts', 'qb_only_show_public_in_archives' );
+
+
+// add_filter('found_posts', 'qb_adjust_archive_pagination', 1, 2 );
+// function qb_adjust_archive_pagination($found_posts, $query) {
+
+//     //Define our offset again...
+//     $offset = 10;
+
+//     //Ensure we're modifying the right query object...
+//     // if ( $query->is_home() ) {
+//     //     //Reduce WordPress's found_posts count by the offset... 
+//     //     return $found_posts - $offset;
+//     // }
+//     // return 1069;
+//     $query->set( 'post_status', 'publish' );
+//     return $found_posts;
+// }
 
 
 // strips "Private" from private board names
@@ -538,6 +569,36 @@ function get_default_thumbnail( $size ) {
 	return wp_get_attachment_image( DEFAULT_THUMBNAIL_ID, $size );
 	// return '<img src="' . DEFAULT_THUMBNAIL_URL . '" width="' . $size . '" height="' . $size . '">';
 }
+
+
+/**
+ *	Display ALL users in author dropdown box when editing post in backend.
+ *	Apparently, it is a bug - see more here:
+ *	http://wordpress.stackexchange.com/questions/91862/users-with-custom-roles-not-showing-in-post-author-select-box
+ */
+function author_override( $output ) {
+    global $post, $user_ID;
+
+    // return if this isn't the theme author override dropdown
+    if (!preg_match('/post_author_override/', $output)) return $output;
+
+    // return if we've already replaced the list (end recursion)
+    if (preg_match ('/post_author_override_replaced/', $output)) return $output;
+
+    // replacement call to wp_dropdown_users
+      $output = wp_dropdown_users(array(
+        'echo' => 0,
+        'name' => 'post_author_override_replaced',
+        'selected' => empty($post->ID) ? $user_ID : $post->post_author,
+        'include_selected' => true
+      ));
+
+      // put the original name back
+      $output = preg_replace('/post_author_override_replaced/', 'post_author_override', $output);
+
+    return $output;
+}
+add_filter('wp_dropdown_users', 'author_override');
 
 
 // create custom post types

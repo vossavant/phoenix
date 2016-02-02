@@ -33,7 +33,7 @@ function register_cpt_boards() {
         'has_archive'           => true,
         'query_var'             => true,
         'can_export'            => true,
-        'rewrite'               => true,
+        'rewrite'               => array( 'slug' => 'boards', 'with_front' => false ),    // lets us set the archive page to /boards/ but keep singular boards at /board/[board_id]
         'capability_type'       => 'post'
     );
 	
