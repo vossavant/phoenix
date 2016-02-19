@@ -71,7 +71,7 @@ img {
 .main {
 	margin: 0 auto;
 	min-height: 300px;
-	padding-bottom: 40px;
+	padding: $headerHeight + 30 0 40px;
 	width: $mainWidth;
 
 	&.wide {

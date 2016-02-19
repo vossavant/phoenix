@@ -65,46 +65,24 @@
 			//echo $custom_page_title;
 		} elseif ( is_front_page() ) {
 			bloginfo( 'description' );
-			$breadcrumb = 'Your Quote Feed';
 
 		} elseif ( is_404() ) {
 			echo 'Page Not Found';
 
 		} elseif ( is_author() ) {
-			$url_endpoint = url_segment( 3 ); // change to 3 on live site
-
-			if ( $is_viewing_own_page ) {
-				$user_pagetitle_name = 'Your';
-
-			} else {
-				$user_pagetitle_name = get_user_by( 'slug', $user_url_nicename )->display_name . "'s";
-			}
-
-			$breadcrumb =  $user_pagetitle_name . ' ' . ucwords( $url_endpoint );
-			
-			echo  $breadcrumb;
+			echo 'Quotes by ' . get_user_by( 'slug', $user_url_nicename )->display_name;
 
 		} elseif ( is_singular( 'quote' ) ) {
-			$breadcrumb = 'Quote Permalink';
-
 			echo get_the_title();
 
 		} elseif ( is_singular( 'board' ) ) {
-			$breadcrumb = get_the_title();
-			if ( !$page_background = get_field( 'background_image' ) ) {
-				$page_background = DEFAULT_BACKGROUND;
-			}
-
-			echo $breadcrumb;
+			echo get_the_title();
 
 		} elseif ( is_page() ) {
-			$breadcrumb = get_the_title();
-
-			echo $breadcrumb;
+			echo get_the_title();
 
 		} elseif ( is_search() ) {
-			$breadcrumb = 'Search Results';
-			echo $breadcrumb;
+			echo 'Search Results for &quot;' . get_search_query() . '&quot;';
 			
 		} else {
 			wp_title( '' );
@@ -124,11 +102,8 @@
 	echo
 	'<header>
 		<a href="' . home_url( '/' ) . '" id="logo" title="Toggle side navigation">';
-			include('includes/logo.php'); echo 'Quoteboard
+			include('includes/logo-icon.php'); echo 'Quoteboard
 		</a>';
-		
-		// search form
-		get_search_form();
 
 		// user menu
 		if ( is_user_logged_in() ) :
@@ -165,27 +140,28 @@
 				echo
 			'</div>';
 		endif;
-		?>
 
-		<!-- main menu -->
-		<?php /*
-		<ul>
-			<?php
-			$menu_params = array(
-				'echo'				=> true,
-				'container' 		=> false,
-				'items_wrap' 		=> '%3$s',
-				'theme_location' 	=> 'primary'
-			);
+		// search form
+		get_search_form();
 
-			wp_nav_menu( $menu_params );
-			?>
-		</ul>
-		*/
+		// main menu
+		echo '<ul>';
+		
+		$menu_params = array(
+			'echo'				=> true,
+			'container' 		=> false,
+			'items_wrap' 		=> '%3$s',
+			'theme_location' 	=> 'primary'
+		);
+
+		wp_nav_menu( $menu_params );
+		
+		echo '</ul>';
 		?>
 	</header>
 
-	<!-- main menu -->
+	<?php
+	/*
 	<nav>
 		<?php //echo $url_endpoint; ?>
 		<ul>
@@ -227,3 +203,4 @@
 			<p>&copy; <?= date( 'Y' ); ?> Quoteboard</p>
 		</footer>
 	</nav>
+	*/

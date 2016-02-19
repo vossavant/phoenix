@@ -36,7 +36,7 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 	'<section class="main">
 		<p class="message quote-edit success">Quote updated successfully</p>';
 
-		$quotes = get_posts(
+		$quotes = new WP_Query(
 			array(
 				'p' 			=> $quote_id,
 				'post_status'	=> array('private', 'publish'),

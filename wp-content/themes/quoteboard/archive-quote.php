@@ -10,7 +10,7 @@ $paged = ( get_query_var('paged') ? get_query_var('paged') : 1 );
 
 echo '
 <section class="main">
-	<h3>Quote Archive <span>Page ' . $paged . '</span></h3>';
+	<h3>Quote Archive <span class="pagenum">Page ' . $paged . '</span></h3>';
 
 	$quotes = new WP_Query(
 		array(

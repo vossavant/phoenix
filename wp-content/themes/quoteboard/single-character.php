@@ -1,14 +1,14 @@
 <?php
 /*
  *	QUOTEBOARD
- *	Single Source View (mimics layout of archives page)
+ *	Single Character View (mimics layout of archives page)
  */
 
 include( TEMPLATEPATH . '/header.php' );
 
 // get cover photo
-if ( !$source_cover_image = get_field( 'source_image' ) ) {
-	$source_cover_image = DEFAULT_BACKGROUND;
+if ( !$character_cover_image = get_field( 'character_image' ) ) {
+	$character_cover_image = DEFAULT_BACKGROUND;
 }
 
 echo
@@ -20,7 +20,7 @@ echo
 				array(
 					'meta_query' => array(
 						array(
-							'key' 	=> 'quote_source',
+							'key' 	=> 'quote_character',
 							'value'	=> $post->ID
 						)
 					),
@@ -39,9 +39,9 @@ echo
 
 		<div class="flex-child flex-40">
 			<div class="profile">
-				<div class="cover" style="background: url(' . $source_cover_image . ') center no-repeat;">
+				<div class="cover" style="background: url(' . $character_cover_image . ') center no-repeat;">
 					<div>
-						<h3><span>Quotes sourced to</span>' . $post->post_title . '</h3>';
+						<h3><span>Quotes attributed to the character</span>' . $post->post_title . '</h3>';
 						// <ul>
 						// 	<li>
 						// 		<span class="ico quote"></span>' . $current_user_quotes . ' Quote' . ( $current_user_quotes != 1 ? 's' : '' ) .
@@ -53,8 +53,9 @@ echo
 					echo
 					'</div>
 				</div>
-				<div class="meta">' . wpautop( get_field( 'source_description' ) ) . '</div>
+				<div class="meta">' . the_content() . '</div>
 			</div>
+			<!-- here list books/movies in which the character appears ... -->
 		</div>
 	</div>
 </section>';

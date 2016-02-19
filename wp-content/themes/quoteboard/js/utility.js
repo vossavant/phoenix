@@ -18,7 +18,7 @@
 		fancybox : {
 			closeBtn : false,
 			margin: 10,
-			maxWidth : 460,
+			maxWidth : 640,
 			minWidth: '98%',
 			padding : 0
 		},
@@ -462,32 +462,32 @@
 		},
 
 
-		/*
-		 *	Retrieves a list of people the current user is following.
-		 *	Used to populate the "Invite People to Board" form.
-		 *	Called when the "Invite" form is opened. Almost identical
-		 *	to the previous function for getting author autocomplete data.
+		/**
+		 *	gets characters
 		 */
-		getAutocompleteFollowing : function() {
-			qb.formData['form_name'] = 'get-following';
+		getAutocompleteCharacters : function() {
+			qb.formData['form_name'] = 'get-characters';
 			
-			if ( !$( '#autocomplete-following' ).length ) {
+			if ( !$( '#autocomplete-characters' ).length ) {
 				$.post( qb_ajax.ajaxURL, qb.formData, function( data ) {
 					data = $.parseJSON( data );
 
+					// console.log(data.json_response)
+					
 					if ( data.errors ) {
 						alert( data.errors );
 					} else {
-						$( 'body' ).append( '<div id="autocomplete-following" />' );
-						$( '#autocomplete-following' ).html( '<script>var qb_autocomp_following = ' + data.json_response + ';</script>' );
+						$( 'body' ).append( '<div id="autocomplete-characters" />' );
+						$( '#autocomplete-characters' ).html( '<script>var qb_autocomp_characters = ' + data.json_response + ';</script>' );
 						
-						// autocomplete - pulled from qb.utility.autcomplete()
-						$('[name="invite_email"]').autocomplete({
-							lookup: qb_autocomp_following,
+						// pulled from qb.utility.autocomplete method
+						$('[name="quote_character"]').autocomplete({
+							lookup: qb_autocomp_characters,
 							lookupLimit: qb.autocomplete.limit,
 							minChars: qb.autocomplete.minChars,
 							onSelect: function (suggestion) {
-								$('.btn.add-invite').attr('data-id', suggestion.data);
+								$('[name="quote_character_id"]').val(suggestion.data);
+								// alert('You selected:' + suggestion.value +',' + suggestion.data);
 							}
 						});
 					}
@@ -503,6 +503,47 @@
 
 
 		/*
+		 *	Retrieves a list of people the current user is following.
+		 *	Used to populate the "Invite People to Board" form.
+		 *	Called when the "Invite" form is opened. Almost identical
+		 *	to the previous function for getting author autocomplete data.
+		 */
+		getAutocompleteFollowing : function() {
+			alert('this function is deprecated');
+			// qb.formData['form_name'] = 'get-following';
+			
+			// if ( !$( '#autocomplete-following' ).length ) {
+			// 	$.post( qb_ajax.ajaxURL, qb.formData, function( data ) {
+			// 		data = $.parseJSON( data );
+
+			// 		if ( data.errors ) {
+			// 			alert( data.errors );
+			// 		} else {
+			// 			$( 'body' ).append( '<div id="autocomplete-following" />' );
+			// 			$( '#autocomplete-following' ).html( '<script>var qb_autocomp_following = ' + data.json_response + ';</script>' );
+						
+			// 			// autocomplete - pulled from qb.utility.autcomplete()
+			// 			$('[name="invite_email"]').autocomplete({
+			// 				lookup: qb_autocomp_following,
+			// 				lookupLimit: qb.autocomplete.limit,
+			// 				minChars: qb.autocomplete.minChars,
+			// 				onSelect: function (suggestion) {
+			// 					$('.btn.add-invite').attr('data-id', suggestion.data);
+			// 				}
+			// 			});
+			// 		}
+
+			// 		// unset formData to prevent issues with later submissions
+			// 		delete qb.formData['form_name'];
+			// 	} );
+			// }
+
+			// // unset formData to prevent issues with later submissions
+			// delete qb.formData['form_name'];
+		},
+
+
+		/*
 		 *	Retrieves a list of quote sources. Used to populate the
 		 *	"where was it said" input. Called when the "Add Quote"
 		 *	or "Edit Quote" forms are opened. Almost identical to the
@@ -510,7 +551,6 @@
 		 */
 		getAutocompleteSources : function() {
 			qb.formData['form_name'] = 'get-sources';
-			console.log('get autocomplete] sources');
 			
 			if ( !$( '#autocomplete-sources' ).length ) {
 				$.post( qb_ajax.ajaxURL, qb.formData, function( data ) {
@@ -1097,6 +1137,7 @@
 			$('#menu-item-624, #menu-item-718').click(function () {
 				self.openAddQuoteFancybox();
 				qb.utility.getAutocompleteAuthors();
+				qb.utility.getAutocompleteCharacters();
 				qb.utility.getAutocompleteSources();
 			});
 
@@ -1307,25 +1348,25 @@
 
 
 			// show side drawer menu on click of main logo
-			$('#logo').click(function (e) {
-				e.preventDefault();
+			// $('#logo').click(function (e) {
+			// 	e.preventDefault();
 
-				var logo = $(this),
-					drawer = $('body > nav'),
-					sideNav = drawer.find('ul');
+			// 	var logo = $(this),
+			// 		drawer = $('body > nav'),
+			// 		sideNav = drawer.find('ul');
 
-				if (sideNav.is(':visible')) {
-					sideNav.fadeOut(function () {
-						logo.animate({ 'margin-left' : 0 }, 250);
-						drawer.animate({ 'left' : -240 }, 250);
-					})
-				} else {
-					logo.animate({ 'margin-left' : 240 }, 250);
-					drawer.animate({ 'left' : 0 }, 250, function () {
-						sideNav.fadeIn();
-					});
-				}
-			} );
+			// 	if (sideNav.is(':visible')) {
+			// 		sideNav.fadeOut(function () {
+			// 			logo.animate({ 'margin-left' : 0 }, 250);
+			// 			drawer.animate({ 'left' : -240 }, 250);
+			// 		})
+			// 	} else {
+			// 		logo.animate({ 'margin-left' : 240 }, 250);
+			// 		drawer.animate({ 'left' : 0 }, 250, function () {
+			// 			sideNav.fadeIn();
+			// 		});
+			// 	}
+			// });
 		}, // init
 
 

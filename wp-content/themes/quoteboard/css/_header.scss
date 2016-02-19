@@ -39,6 +39,82 @@ body > header {
 		}
 	}
 
+	li a {
+		line-height: normal;
+		opacity: 0.5;
+		padding: 20px 15px;
+		text-transform: none;
+
+		// &:last-child {
+		// 	padding-right: 20px;
+		// }
+	}
+
+	li a:hover {
+		background: none;
+		color: $white;
+		opacity: 1;
+	}
+
+	nav ul {
+		display: none;
+		float: right;
+	}
+
+	nav + ul {
+		float: right;
+	}
+
+	nav ul ul li:first-child a {
+		border-bottom-color: lighten($qbPurple, 10%);
+	}
+
+	nav ul ul li:first-child span {
+		margin-bottom: 0;
+	}
+
+	nav ul ul li:last-child {
+		border-top-color: lighten($qbPurple, 10%);
+	}
+
+	nav ul:hover {
+		background: transparentize($qbPurple, 0.1);
+
+		#dropdown-avatar {
+			opacity: 1;
+		}
+	}
+
+	nav ul ul {
+		width: 220px;
+	}
+
+	nav ul ul:hover {
+		background: none;
+	}
+
+	nav ul ul a {
+		background: transparentize($qbPurple, 0.1);
+		color: $white;
+		opacity: 1;
+		padding: 10px;
+
+		&:hover {
+			background: $qbPurple;
+		}
+	}
+
+	.ico {
+		left: auto;
+		right: 11px;
+		top: 22px;
+	}
+
+	.ico:before {
+		color: $grayIcon;
+		font-size: 14px;
+	}
+
 	.ico.search {
 		bottom: 12px;
 		left: auto;
@@ -58,25 +134,16 @@ body > header {
 		float: left;
 
 		a {
-			// color: $qbPurple;
 			color: $white;
 			display: inline-block;
 			font-size: 14px;
-			line-height: 60px;
-			padding: 0 15px;
-			text-transform: uppercase;
 		}
 
 		a:hover {
-			background-color: transparentize($qbPurple, 0.95);
-			color: darken($qbPurple, 10%);
+			// background-color: transparentize($qbPurple, 0.95);
+			// color: darken($qbPurple, 10%);
 			text-decoration: none;
 		}
-	}
-
-	ul {
-		display: none;
-		float: right;
 	}
 
 	#logo {
@@ -93,7 +160,8 @@ body > header {
 		}
 
 		svg {
-			width: 160px;
+			// width: 160px;	// for whole word
+			height: 26px;		// for icon
 
 			path {
 				fill: $white;
@@ -142,7 +210,6 @@ header > nav {
 		a {
 			background: $info;
 			display: block;
-			line-height: 45px;
 			text-transform: none;
 		}
 
@@ -175,23 +242,19 @@ header > nav {
 	}
 
 	#dropdown-avatar {
+		display: block;
 		line-height: normal;
-		padding: 6px 30px 6px 15px;
+		padding: 14px 30px 14px 15px;
 		position: relative;
+
+		&:hover .ico:before {
+			color: $white;
+		}
 
 		img {
 			display: block;
-		}
-
-		.ico {
-			left: auto;
-			right: 11px;
-			top: 22px;
-		}
-
-		.ico:before {
-			color: $qbPurple;
-			font-size: 16px;
+			height: 32px;
+			width: 32px;
 		}
 	}
 }
@@ -200,6 +263,7 @@ header > nav {
 /** Signed Out - Sign In or Join Options */
 
 #login-options {
+	display: none;
 	float: right;
 
 	a {
@@ -229,10 +293,6 @@ body > nav {
 	top: 0;
 	width: $headerNavWidth;
 	z-index: 100;
-
-	+ .main {
-		padding-top: $headerHeight + 30;
-	}
 	
 	a {
 		color: $white;

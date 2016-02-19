@@ -12,9 +12,11 @@
 //$quote_text_hashed		= wp_unslash( sanitize_text_field( $_POST['quote_text'] ) );
 $quote_text_hashed		= implode( "\n", array_map( 'sanitize_text_field', explode( "\n", $_POST['quote_text'] ) ) ); // keeps line breaks
 $quote_attributed_to 	= wp_unslash( sanitize_text_field( $_POST['quote_author'] ) );
+$quote_character		= wp_unslash( sanitize_text_field( $_POST['quote_character'] ) );
 $quote_source		 	= wp_unslash( sanitize_text_field( $_POST['quote_source'] ) );
 $quote_source_info 		= wp_unslash( sanitize_text_field( $_POST['quote_source_info'] ) );
 $quote_attributed_to_id	= absint( $_POST['quote_author_id'] );
+$quote_character_id		= absint( $_POST['quote_character_id'] );
 $quote_sourced_to_id	= absint( $_POST['quote_source_id'] );
 $quote_board 			= absint( $_POST['quote_board'] );
 $quote_hashtags 		= array();
@@ -88,6 +90,7 @@ if ( empty( $quote_attributed_to ) ) {
 	}
 }
 
+
 // assign quote source
 if ( !empty( $quote_source ) ) {
 	// check if ID matches an existing ID
@@ -100,8 +103,8 @@ if ( !empty( $quote_source ) ) {
 
 	// else create a new source
 	} else {
-		$source_title 	= truncate( $quote_source, 72 );
-		$source_slug	= sanitize_title( $source_title );
+		$source_title 	= $quote_source;	// truncate( $quote_source, 72 );	// don't want to truncate title any more
+		$source_slug	= sanitize_title( truncate( $source_title, 72 ) );
 
 		$insert_parameters = array (
 			'post_author'	=> $quote_attributed_to_id,
@@ -115,6 +118,50 @@ if ( !empty( $quote_source ) ) {
 		$quote_sourced_to_id = $source_added_id;
 	}
 }
+
+
+// assign quote character
+if ( !empty( $quote_character ) ) {
+	// check if ID matches an existing ID
+	if ( $existing_character_id = $wpdb->get_var( "SELECT ID FROM $wpdb->posts WHERE ID = '" . $quote_character_id . "' AND post_type = 'character' AND post_status = 'publish'" ) ) {
+		$quote_character_id = $existing_character_id;
+
+	// else create a new character
+	} else {
+		$character_title 	= $quote_character;
+		$character_slug		= sanitize_title( truncate( $character_title, 72 ) );
+
+		$insert_parameters = array (
+			'post_author'	=> $quote_attributed_to_id,
+			'post_name'		=> $character_slug,
+			'post_status'	=> 'publish',
+			'post_title'	=> $character_title,
+			'post_type'		=> 'character',
+		);
+
+		$character_added_id = wp_insert_post( $insert_parameters );
+		$quote_character_id = $character_added_id;
+	}
+
+	// assign source
+	if ( !empty( $quote_sourced_to_id ) ) {
+		$existing_sources = get_field( 'character_appears_in', $quote_character_id );
+
+		// if no sources exist, create the first
+		if ( empty( $existing_sources ) ) {
+			$existing_sources = $quote_sourced_to_id;
+
+		// only add the source if it hasn't previously been added
+		} else {
+			if ( !in_array( $quote_sourced_to_id, $existing_sources ) ) {
+				$existing_sources[] = $quote_sourced_to_id;
+			}
+		}
+
+		update_field( 'field_56b7914759299', $existing_sources, $quote_character_id );
+	}
+}
+
 
 // store all hashtags in an array (note: add dash support for two words by using \w+-?\w+)
 preg_match_all( '/(#\w+)/', $quote_text_hashed, $hashtags );

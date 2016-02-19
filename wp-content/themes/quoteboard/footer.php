@@ -32,10 +32,10 @@
 	}
 
 	// don't load analytics on localhost (custom field isn't working right now)
-	if ( !stristr( $_SERVER['REQUEST_URI'], 'localhost' ) ) {
-		if ( $analytics = get_field( 'ga_tracking_code', 'option' ) ) {
-			echo $analytics;
-		} else {
+	if ( !stristr( $_SERVER['REQUEST_URI'], '~ryanburney' ) ) {
+		// $analytics = get_field( 'ga_tracking_code', 'option' );
+		// echo $analytics;
+		// } else {
 			echo
 			"<script>
 				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -46,7 +46,7 @@
 				ga('create', 'UA-73002005-1', 'auto');
 				ga('send', 'pageview');
 			</script>";
-		}
+		// }
 	}
 
 	wp_footer();

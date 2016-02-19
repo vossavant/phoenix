@@ -10,7 +10,7 @@ function register_cpt_sources() {
         'add_new_item' => _x( 'Add New Source', 'source' ),
         'edit_item' => _x( 'Edit Source', 'source' ),
         'new_item' => _x( 'New Source', 'source' ),
-        'view_item' => _x( 'View Sources', 'source' ),
+        'view_item' => _x( 'View Source', 'source' ),
         'search_items' => _x( 'Search Sources', 'source' ),
         'not_found' => _x( 'No Sources found', 'source' ),
         'not_found_in_trash' => _x( 'No Sources found in Trash', 'source' ),

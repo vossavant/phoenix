@@ -10,7 +10,7 @@ $paged = ( get_query_var('paged') ? get_query_var('paged') : 1 );
 
 echo '
 <section class="main">
-	<h3>Source Archive <span>Page ' . $paged . '</span></h3>';
+	<h3>Source Archive <span class="pagenum">Page ' . $paged . '</span></h3>';
 
 	$sources = new WP_Query(
 		array(

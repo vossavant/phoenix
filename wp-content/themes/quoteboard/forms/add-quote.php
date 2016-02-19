@@ -32,6 +32,11 @@
 			<input name="quote_author_id" type="hidden" />
 		</div>
 		<div>
+			<input name="quote_character" placeholder="Which character said it?" type="text">
+			<span class="ico user"></span>
+			<input name="quote_character_id" type="hidden">
+		</div>
+		<div>
 			<input name="quote_source" placeholder="Where was it said?" type="text" />
 			<span class="ico earth"></span>
 			<input name="quote_source_id" type="hidden" />

@@ -605,6 +605,7 @@ add_filter('wp_dropdown_users', 'author_override');
 include_once( TEMPLATEPATH . '/includes/custom_post_type_quotes.php' );
 include_once( TEMPLATEPATH . '/includes/custom_post_type_boards.php' );
 include_once( TEMPLATEPATH . '/includes/custom_post_type_sources.php' );
+include_once( TEMPLATEPATH . '/includes/custom_post_type_characters.php' );
 
 // include AJAX and utility functions
 include_once( TEMPLATEPATH . '/includes/utility.php' );

@@ -10,6 +10,9 @@
 // fetch qoute author
 $author = get_field( 'quote_author' ) ? get_field( 'quote_author' ) : 'Anonymous';
 
+// fetch character
+$character = get_field( 'quote_character' );
+
 // fetch quote contributor; set to "You" for quotes added by current user
 $contributor = get_the_author_meta( 'display_name' );
 if ( $contributor == $current_user->display_name ) {
@@ -28,6 +31,13 @@ $board_id = get_post_meta( $post->ID, 'quote_board', true );
 if ( !$author_avatar = get_wp_user_avatar( $author['ID'], 60 ) ) {
 	$author_avatar = get_default_thumbnail( 'thumb-small' );
 }
+
+// use character image whenever possible
+if ( $character ) {
+	if ( $character_image_id = get_field( 'character_image', $character->ID ) ) {
+		$author_avatar = wp_get_attachment_image( $character_image_id, 'thumb-small' );
+	}
+}
 ?>
 
 <article class="quote box<?= $quote_class; ?>" data-author="<?= $author['ID']; ?>" data-board="<?= $board_id; ?>" data-id="<?= $post->ID; ?>">
@@ -39,8 +49,21 @@ if ( !$author_avatar = get_wp_user_avatar( $author['ID'], 60 ) ) {
 			<?php
 			if ( is_singular( 'quote' ) ) {
 				// parse all hashtags into URLs
-				echo '<q cite="q_' . $post->ID . '">' . preg_replace( '/#(\w+)/', ' <i>#</i><a href="' . home_url('/') . 'tag/$1">$1</a>', wpautop( get_the_content() ) ) . '</q>';
-				echo '<cite id="q_' . $post->ID . '"><a href="' . home_url('/') . 'author/' . $author['user_nicename'] . '" title="See quotes attributed to ' . $author['display_name'] . '">' . $author['display_name'] . '</a></cite>';
+				echo
+				'<q cite="q_' . $post->ID . '">' . preg_replace( '/#(\w+)/', ' <i>#</i><a href="' . home_url('/') . 'tag/$1">$1</a>', wpautop( get_the_content() ) ) . '</q>
+				<cite id="q_' . $post->ID . '">';
+
+					// character
+					if ( $character ) {
+						// var_dump($character);
+						echo '<a href="' . home_url('/') . 'character/' . $character->post_name . '" title="See quotes attributed to the character ' . $character->post_title . '">' . $character->post_title . '</a> <span>via</span> <a href="' . home_url('/') . 'author/' . $author['user_nicename'] . '" title="See quotes attributed to ' . $author['display_name'] . '">' . $author['display_name'] . '</a>';
+					
+					// just author
+					} else {
+						echo '<a href="' . home_url('/') . 'author/' . $author['user_nicename'] . '" title="See quotes attributed to ' . $author['display_name'] . '">' . $author['display_name'] . '</a>';
+					}
+					echo
+				'</cite>';
 
 				if ( $quote_source = get_field( 'quote_source' ) ) {
 					echo '<span class="box-meta quote-source"><a href="' . home_url('/') . 'source/' . $quote_source->post_name . '" title="See quotes from ' . $quote_source->post_title . '">' . $quote_source->post_title . '</a></span>';
@@ -55,7 +78,14 @@ if ( !$author_avatar = get_wp_user_avatar( $author['ID'], 60 ) ) {
 					if (is_singular('quote')) {
 						// echo $contributor . '<span>shared this</span>';
 					} else {
-						echo $author['display_name'];// . '<span>@' . get_the_author_meta('user_nicename') . '</span>';
+						// character
+						if ( $character ) {
+							echo $character->post_title . ' <span>via <b>' . $author['display_name'] . '</b></span>';
+						
+						// just author
+						} else {
+							echo $author['display_name']; // . '<span>@' . get_the_author_meta('user_nicename') . '</span>';
+						}
 					}
 
 				echo '</h4>';

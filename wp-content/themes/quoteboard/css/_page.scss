@@ -4,9 +4,8 @@
 //
 
 .archive {
-	h3 span {
-		@extend .box-meta;
-		margin-top: 20px;
+	.main > h3:first-child {
+		margin-top: 0;
 	}
 }
 

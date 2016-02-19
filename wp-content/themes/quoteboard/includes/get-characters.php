@@ -1,11 +1,11 @@
 <?php
 /*
  *	QUOTEBOARD
- *	Get Authors
+ *	Get Characters
  *
- *	Retrieves a list of authors ("member-added" user role). Used to
- *	populate the "who said it" dropdown, and called when the "Add Quote"
- *	or "Edit Quote" forms are used.
+ *	Retrieves a list of characters. Used to populate the character
+ *	dropdown, and called when the "Add Quote" or "Edit Quote" forms
+ *	are used.
  */
 
 if ( !is_user_logged_in() ) :
@@ -14,28 +14,20 @@ if ( !is_user_logged_in() ) :
 endif;
 
 
-if ( isset( $_POST['form_name'] ) && $_POST['form_name'] == 'get-authors' ) {
+if ( isset( $_POST['form_name'] ) && $_POST['form_name'] == 'get-characters' ) {
 	global $wpdb;
 	$json_response 	= '';
-
-	// get the authors
-	$get_authors = get_users(
-		array(
-			'orderby'	=> 'display_name',
-			'role'		=> 'member_added'
-		)
-	);
 
 
 	/**
 	 *	Build JSON object for autocomplete plugin (for proper formatting, see docs: https://github.com/devbridge/jQuery-Autocomplete)
 	 *	addslashes() escapes double quotes, which break everything
 	 */
-	if ( $get_authors ) {
+	if ( $get_characters = $wpdb->get_results( "SELECT ID, post_title FROM $wpdb->posts WHERE post_type = 'character' AND post_status = 'publish' ORDER BY post_title" ) ) {
 		$json_response = '[';
 
-		foreach ( $get_authors as $member_added ) {
-			$json_response .= '{ value: "' . addslashes( $member_added->display_name ) . '", data: "' . $member_added->ID . '" },';
+		foreach ( $get_characters as $character ) {
+			$json_response .= '{ value: "' . addslashes( $character->post_title ) . '", data: "' . $character->ID . '" },';
 		}
 
 		$json_response = rtrim( $json_response, ',' );

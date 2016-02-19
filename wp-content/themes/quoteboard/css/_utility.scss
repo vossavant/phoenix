@@ -540,7 +540,7 @@ form .ico {
 // pagination, lazy loader
 
 .pagination {
-	border-top: 1px solid $grayIcon;
+	border-top: 1px dotted $grayIcon;
 	margin: 20px 0 0 80px; 	// margin-left matches avatar width on archives view
 	padding: 20px 0;
 	text-align: center;
@@ -565,48 +565,7 @@ form .ico {
 	}
 }
 
-// #lazyloader {
-// 	background: url('../images/loading.gif') center no-repeat;
-// 	display: none;
-// 	height: 16px;
-// }
-
-
-// random column STuff for board invite form
-
-/*
-.board-invite {
-	form > {
-		div:last-child {
-			clear: both;
-			padding-bottom: 20px;
-			text-align: right;
-		}
-
-		div:last-child button {
-			width: auto;
-		}
-
-		h2 {
-			margin-bottom: 0;
-		}
-	}
-
-	h4 {
-		font: 18px "Roboto Medium";
-		margin: 0 0 1em;
-	}
-
-	.col {
-		border-right: 1px solid darken($white, 10%);
-		box-sizing: border-box;
-		float: left;
-		margin: 0 !important;
-		width: 50%;
-
-		& + .col {
-			border: 0;
-		}
-	}
+.pagenum {
+	@extend .box-meta;
+	margin-top: 20px;
 }
-*/

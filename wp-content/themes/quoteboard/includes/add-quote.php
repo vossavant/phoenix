@@ -49,6 +49,9 @@ if ( $quote_updated ) {
 	add_post_meta( $quote_added_id, 'quote_author', $quote_attributed_to_id );
 	add_post_meta( $quote_added_id, '_quote_author', 'field_507658884a81f' );
 
+	add_post_meta( $quote_added_id, 'quote_character', $quote_character_id );
+	add_post_meta( $quote_added_id, '_quote_character', 'field_56b7b9f5c3303' );
+
 	add_post_meta( $quote_added_id, 'quote_source', $quote_sourced_to_id );
 	add_post_meta( $quote_added_id, '_quote_source', 'field_507658884b202' );
 	
