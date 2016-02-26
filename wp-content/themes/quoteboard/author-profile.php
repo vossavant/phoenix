@@ -24,7 +24,7 @@ echo '
 	</div>
 	<div class="photo clearfix">
 		<label for="profile-photo">Profile Photo</label>
-		<img alt="Profile Photo" src="' . TIMTHUMB_PATH . $avatar . '&w=80&h=80" />
+		<img alt="Profile Photo" src="' . get_wp_user_avatar( $current_user->ID, 'thumb-small' ) ) . '" />
 		<input id="profile-photo" name="profile_photo" type="file" />
 		<a class="delete remove-photo pp' . ( $avatar == DEFAULT_THUMBNAIL ? ' default' : '' ) . '" href="" title="Delete Photo">Delete Photo</a>
 		<span class="loading"></span>
