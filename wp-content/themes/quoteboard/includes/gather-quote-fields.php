@@ -93,8 +93,8 @@ if ( empty( $quote_attributed_to ) ) {
 
 // assign quote source
 if ( !empty( $quote_source ) ) {
-	// check if ID matches an existing ID
-	if ( $existing_source_id = $wpdb->get_var( "SELECT ID FROM $wpdb->posts WHERE ID = '" . $quote_sourced_to_id . "' AND post_type = 'source' AND post_status = 'publish'" ) ) {
+	// check if ID matches an existing ID and name
+	if ( $existing_source_id = $wpdb->get_var( "SELECT ID FROM $wpdb->posts WHERE ID = '" . $quote_sourced_to_id . "' AND post_title = '" . $quote_source . "' AND post_type = 'source' AND post_status = 'publish'" ) ) {
 		$quote_sourced_to_id = $existing_source_id;
 
 	// check if the string entered matches an existing source
@@ -122,8 +122,8 @@ if ( !empty( $quote_source ) ) {
 
 // assign quote character
 if ( !empty( $quote_character ) ) {
-	// check if ID matches an existing ID
-	if ( $existing_character_id = $wpdb->get_var( "SELECT ID FROM $wpdb->posts WHERE ID = '" . $quote_character_id . "' AND post_type = 'character' AND post_status = 'publish'" ) ) {
+	// check if ID matches an existing ID and name
+	if ( $existing_character_id = $wpdb->get_var( "SELECT ID FROM $wpdb->posts WHERE ID = '" . $quote_character_id . "' AND post_title = '" . $quote_character . "' AND post_type = 'character' AND post_status = 'publish'" ) ) {
 		$quote_character_id = $existing_character_id;
 
 	// else create a new character
