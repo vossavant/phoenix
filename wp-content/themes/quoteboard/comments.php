@@ -5,7 +5,7 @@
  */
 
 // get avatar (relies on WP User Avatar plugin)
-if ( !$current_user_avatar = get_wp_user_avatar( get_current_user_id(), 48 ) ) {
+if ( !$current_user_avatar = get_wp_user_avatar( get_current_user_id(), 'thumb-small' ) ) {
 	$current_user_avatar = DEFAULT_THUMBNAIL;
 }
 
