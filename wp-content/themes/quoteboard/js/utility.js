@@ -793,7 +793,8 @@
 				boardSelectMenu = editWrapper.find('select'),
 				quoteWrapper	= clicked.closest('article'),
 				quoteText 		= quoteWrapper.find('q'),
-				quoteAuthor 	= quoteWrapper.find('cite').text(),
+				quoteAuthor 	= quoteWrapper.find('cite').find('a:last-of-type').text(),
+				quoteCharacter 	= quoteWrapper.find('cite').find('a:first-of-type:not(:only-child)').text(),
 				quoteSource 	= quoteWrapper.find('.quote-source').text();
 				boardID 		= quoteWrapper.attr('data-board'),
 				quoteID			= quoteWrapper.attr('data-id');
@@ -807,6 +808,8 @@
 			// author
 			editWrapper.find( '#edit-quote-author' ).val( quoteAuthor );
 			editWrapper.find( '[name="quote_author_id"]' ).val( authorID );
+			//character
+			editWrapper.find( '[name="quote_character"]' ).val( quoteCharacter );
 			//source
 			editWrapper.find('[name="quote_source"]').val(quoteSource);
 			// board
@@ -1316,6 +1319,9 @@
 			// open quote edit form
 			$('.edit-quote').click(function (e) {
 				e.preventDefault();
+				qb.utility.getAutocompleteAuthors();
+				qb.utility.getAutocompleteCharacters();
+				qb.utility.getAutocompleteSources();
 				qb.utility.populateQuoteEditForm($(this));
 			});
 
