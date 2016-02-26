@@ -52,8 +52,23 @@ if ( $quote_updated_id ) {
 	update_post_meta( $quote_updated_id, 'quote_author', $quote_attributed_to_id );
 	update_post_meta( $quote_updated_id, '_quote_author', 'field_507658884a81f' );
 
-	update_post_meta( $quote_updated_id, 'quote_source', $quote_sourced_to_id );
-	update_post_meta( $quote_updated_id, '_quote_source', 'field_507658884b202' );
+	// remove quote character if field left empty
+	if ( empty( $quote_character ) ) {
+		delete_post_meta( $quote_updated_id, 'quote_character' );
+		delete_post_meta( $quote_updated_id, '_quote_character' );
+	} else {
+		update_post_meta( $quote_updated_id, 'quote_character', $quote_character_id );
+		update_post_meta( $quote_updated_id, '_quote_character', 'field_56c724e28d8b8' );
+	}
+
+	// remove quote source if field left empty
+	if ( empty( $quote_source ) ) {
+		delete_post_meta( $quote_updated_id, 'quote_source' );
+		delete_post_meta( $quote_updated_id, '_quote_source' );
+	} else {
+		update_post_meta( $quote_updated_id, 'quote_source', $quote_sourced_to_id );
+		update_post_meta( $quote_updated_id, '_quote_source', 'field_507658884b202' );
+	}
 
 	update_post_meta( $quote_updated_id, 'quote_board', $quote_board );
 	update_post_meta( $quote_updated_id, '_quote_board', 'field_5077ae14b09b9' );
