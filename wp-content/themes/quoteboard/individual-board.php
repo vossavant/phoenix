@@ -36,6 +36,11 @@ if ( !$board_description = get_the_content() ) {
 	$board_description = '<em>Alas, this board has no description.</em>';
 }
 
+// TO DO: this is a solution only for desktop; better to hide overflowing content with CSS styles
+if ( is_archive() ) {
+	$board_description = truncate( $board_description, 245 );
+}
+
 echo
 '<article class="board box">
 	<a class="avatar" href="' . get_permalink() . '">' . $board_thumbnail . '</a>
