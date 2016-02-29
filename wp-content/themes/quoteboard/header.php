@@ -3,11 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
-	<link rel="shortcut icon" href="<?php bloginfo( 'template_url' ); ?>/favicon.ico" />
-	<link rel="apple-touch-startup-image" href="<?php bloginfo( 'template_url' ); ?>/images/mobile/ios-startup.png" />
-	<link rel="apple-touch-icon-precomposed" href="<?php bloginfo( 'template_url' ); ?>/images/mobile/apple-touch.png" />
-	
+	<link rel="shortcut icon" href="<?php bloginfo( 'template_url' ); ?>/favicon.ico">
+	<link rel="apple-touch-startup-image" href="<?php bloginfo( 'template_url' ); ?>/images/mobile/ios-startup.png">
+	<link rel="apple-touch-icon-precomposed" href="<?php bloginfo( 'template_url' ); ?>/images/mobile/apple-touch.png">
+
 	<?php
+	// meta description
+	if ($meta_description = get_field( 'seo_description' ) ) {
+		echo '<meta name="description" content="' . $meta_description . '">';
+	}
+
 	// get current user object (username, etc.)
 	$current_user = wp_get_current_user();
 	if ( !$current_user instanceof WP_User ) {
@@ -61,8 +66,8 @@
 
 	<title>
 		<?php
-		if ( $custom_page_title ) {
-			//echo $custom_page_title;
+		if ( $custom_page_title = get_field( 'seo_title' ) ) {
+			echo $custom_page_title;
 		} elseif ( is_front_page() ) {
 			bloginfo( 'description' );
 
@@ -125,12 +130,16 @@
 						</ul>
 					</li>
 				</ul>
-			</nav>
+			</nav>';
 			
-			<ul>
-				<li id="menu-item-718" class="menu-item-718"><a href="#">Add Quote</a></li>
-				<li id="menu-item-719" class="menu-item-719"><a href="#">Add Board</a></li>
-			</ul>';
+			// only admin can see these options
+			if ( current_user_can( 'activate_plugins' ) ) :
+				echo
+				'<ul>
+					<li id="menu-item-718" class="menu-item-718"><a href="#">Add Quote</a></li>
+					<li id="menu-item-719" class="menu-item-719"><a href="#">Add Board</a></li>
+				</ul>';
+			endif;
 
 		else :
 			echo
