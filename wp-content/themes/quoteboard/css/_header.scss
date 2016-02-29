@@ -396,3 +396,12 @@ body > nav {
 		display: block;
 	}
 }
+
+
+// Highlight current top level page
+.post-type-archive-quote #menu-item-717 a,
+.post-type-archive-board #menu-item-716 a,
+.page-id-483 #menu-item-484 a {
+	cursor: default;
+	opacity: 1;
+}

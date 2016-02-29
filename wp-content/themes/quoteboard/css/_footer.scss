@@ -11,6 +11,10 @@ body > footer {
 	li {
 		display: inline-block;
 
+		&.current-menu-item a {
+			color: lighten($qbPurple, 50%);
+		}
+
 		a {
 			display: inline-block;
 			color: lighten($qbPurple, 25%);

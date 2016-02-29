@@ -293,7 +293,6 @@ p.error-inline {
   .ico.collab {
     display: block;
     -webkit-transform: rotate(180deg);
-        -ms-transform: rotate(180deg);
             transform: rotate(180deg); }
   .ico.collab:before {
     content: "\e618";
@@ -577,7 +576,6 @@ textarea {
     .home .curated article:hover img {
       opacity: 0.85;
       -webkit-transform: scale(1.05);
-          -ms-transform: scale(1.05);
               transform: scale(1.05); }
     .home .curated article:hover h4 {
       text-decoration: underline; }
@@ -966,12 +964,20 @@ body > nav {
 .logged-in > header > nav > ul {
   display: block; }
 
+.post-type-archive-quote #menu-item-717 a,
+.post-type-archive-board #menu-item-716 a,
+.page-id-483 #menu-item-484 a {
+  cursor: default;
+  opacity: 1; }
+
 body > footer {
   background: #4c1b2f;
   padding: 80px 0;
   text-align: center; }
   body > footer li {
     display: inline-block; }
+    body > footer li.current-menu-item a {
+      color: #d78fac; }
     body > footer li a {
       display: inline-block;
       color: #aa3c69;
@@ -1357,6 +1363,7 @@ cite + .box-meta, cite + .pagenum, .box.quote cite + time, #comment-list cite + 
     -webkit-box-align: center;
     -webkit-align-items: center;
         -ms-flex-align: center;
+                -ms-grid-row-align: center;
             align-items: center;
     background-size: cover !important;
     border-radius: 4px 4px 0 0;
