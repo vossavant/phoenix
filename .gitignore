@@ -22,3 +22,5 @@ wp-content/themes/quoteboard/config.codekit
 *.codekit
 
 *.codekit
+
+*.scssc
