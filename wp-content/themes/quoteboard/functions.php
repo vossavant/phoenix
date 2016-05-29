@@ -99,7 +99,7 @@ function qb_get_attachment_id_by_url( $url ) {
  */
 function qb_add_roles(){
 	$roles_set = get_option( 'member_added_role_set' );
-	
+
 	if ( !$roles_set ) {
 		add_role( 'member_added', 'Member Added', array(
 			'read' => true
@@ -123,7 +123,7 @@ function qb_acf_options( $settings ) {
 
 	return $settings;
 }
- 
+
 add_filter( 'acf/options_page/settings', 'qb_acf_options' );
 
 
@@ -261,7 +261,7 @@ function qb_init_facebook_sdk() { ?>
 		// default to production app ID
 		var facebook_app_id = '178780368854509';
 
-		// if on staging, use test app ID		
+		// if on staging, use test app ID
 		if (window.location.host.indexOf('staging') !== -1) {
 			facebook_app_id = '825591250840081';
 		}
@@ -445,8 +445,8 @@ function qb_count_faves( $quote ) {
 }
 
 
-/** 
- * SMTP configuration to pass all emails (even non-templated ones) 
+/**
+ * SMTP configuration to pass all emails (even non-templated ones)
  * through Mandrill.
  *
  *	NOTE: here for decorative purposes, since we accomplish the same functionality
@@ -457,31 +457,31 @@ function qb_send_email_through_mandrill( $phpmailer ) {
 	$phpmailer->isSMTP();
     $phpmailer->SMTPAuth = true;
     $phpmailer->SMTPSecure = "tls";
-     
+
     $phpmailer->Host = "smtp.mandrillapp.com";
     $phpmailer->Port = "587";
-  
+
     // Credentials for SMTP authentication
     $phpmailer->Username = 'mandrill@quoteboard.com';
     $phpmailer->Password = 'A0OD2ZTRhCPITZYSpVDHIQ';
-  
+
     // From email and name
     $from_name = 'Quoteboard';
     if ( ! isset( $from_name ) ) {
         $from_name = 'WordPress';
     }
- 
-    $from_email = 'noreply@quoteboard.com';        
+
+    $from_email = 'noreply@quoteboard.com';
     if ( ! isset( $from_email ) ) {
         // Get the site domain and get rid of www.
         $sitename = strtolower( $_SERVER['SERVER_NAME'] );
         if ( 'www.' == substr( $sitename, 0, 4 )  ) {
             $sitename = substr( $sitename, 4 );
         }
-         
+
         $from_email = 'wordpress@' . $sitename;
     }
-     
+
     $phpmailer->From = $from_email;
     $phpmailer->FromName = $from_name;
 }
@@ -510,7 +510,7 @@ function qb_paginate() {
     );
     if ( $wp_rewrite->using_permalinks() ) $pagination['base'] = user_trailingslashit( trailingslashit( remove_query_arg( 's', get_pagenum_link( 1 ) ) ) . 'page/%#%/', 'paged' );
     if ( !empty($wp_query->query_vars['s']) ) $pagination['add_args'] = array( 's' => get_query_var( 's' ) );
-    
+
     echo '<div class="pagination">' . paginate_links( $pagination ) . '</div>';
 }
 
@@ -518,11 +518,13 @@ function qb_paginate() {
 /**
  * 	Modifies the main query to only count published posts (e.g., quotes)
  *	Otherwise, pagination is off since it counts all posts, which results
- *	in extra pages being shown.
+ *	on extra pages being shown.
  */
 function qb_only_show_public_in_archives( $query ) {
-	if ( $query->is_main_query() && $query->is_post_type_archive()  ) {
-		$query->set( 'post_status', 'publish' );
+	if ( !is_admin() ) {
+		if ( $query->is_main_query() && $query->is_post_type_archive()  ) {
+			$query->set( 'post_status', 'publish' );
+		}
 	}
 }
 add_action( 'pre_get_posts', 'qb_only_show_public_in_archives' );
@@ -536,7 +538,7 @@ add_action( 'pre_get_posts', 'qb_only_show_public_in_archives' );
 
 //     //Ensure we're modifying the right query object...
 //     // if ( $query->is_home() ) {
-//     //     //Reduce WordPress's found_posts count by the offset... 
+//     //     //Reduce WordPress's found_posts count by the offset...
 //     //     return $found_posts - $offset;
 //     // }
 //     // return 1069;
