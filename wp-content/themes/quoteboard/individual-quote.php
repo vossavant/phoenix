@@ -66,7 +66,7 @@ if ( $character ) {
 				'</cite>';
 
 				if ( $quote_source = get_field( 'quote_source' ) ) {
-					echo '<span class="box-meta quote-source"><a href="' . home_url('/') . 'source/' . $quote_source->post_name . '" title="See quotes from ' . $quote_source->post_title . '">' . $quote_source->post_title . '</a></span>';
+					echo '<span class="box-meta quote-source"><a href="' . home_url('/') . 'sources/' . $quote_source->post_name . '" title="See quotes from ' . $quote_source->post_title . '">' . $quote_source->post_title . '</a></span>';
 				}
 			} else {
 				echo '<h4>';
