@@ -5,11 +5,15 @@
  *
  *	Adds a new quote. Loaded when a user clicks the "New Quote" button.
  */
+echo json_encode(array('boards' => $_POST['quote_boards']));
+exit;
 
-if ( !is_user_logged_in() ) :
-	echo json_encode( array( 'errors' => 'Sorry, this form submission is not allowed.' ) );
+if ($_POST['is_scrape']) {
+	require_once( '../../../../wp-load.php' );
+} elseif ( !is_user_logged_in() ) {
+	echo json_encode(array('errors' => 'Sorry, this form submission is not allowed.'));
 	exit;
-endif;
+}
 
 // set default timezone
 date_default_timezone_set ( 'America/Denver' );
@@ -19,6 +23,10 @@ global $wpdb;
 
 // gather and sanitize fields, etc
 include_once( TEMPLATEPATH . '/includes/gather-quote-fields.php' );
+
+if ($_POST['is_scrape']) {
+	$current_user_id = 2;
+}
 
 // prepare for insert
 $insert_parameters = array (
@@ -65,6 +73,7 @@ if ( $quote_updated ) {
 	echo json_encode(
 		array(
 			'added_by'	=> $current_user_id,
+			'author_id' => $quote_attributed_to_id,
 			'board_id'	=> $quote_board,
 			'quote_id'	=> $quote_added_id,
 			'home_url'	=> home_url(),
