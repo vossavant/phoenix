@@ -24,7 +24,7 @@ $query =
 	ORDER BY post_title";
 
 $board_list = '
-<select data-placeholder="Post to which board?" name="quote_board">
+<select data-placeholder="Post to which boards?" multiple name="quote_boards[]">
 	<option value=""></option>
 	<option value="">&mdash; Create New Board &mdash;</option>';
 
