@@ -104,18 +104,18 @@ body > header {
 		}
 	}
 
-	.ico {
+	.material-icons {
 		left: auto;
 		right: 11px;
 		top: 22px;
 	}
 
-	.ico:before {
+	.material-icons:before {
 		color: $grayIcon;
 		font-size: 14px;
 	}
 
-	.ico.search {
+	.material-icons.search {
 		bottom: 12px;
 		left: auto;
 		right: 20px;
@@ -247,7 +247,7 @@ header > nav {
 		padding: 14px 30px 14px 15px;
 		position: relative;
 
-		&:hover .ico:before {
+		&:hover .material-icons:before {
 			color: $white;
 		}
 
@@ -364,7 +364,7 @@ body > nav {
 		margin-top: 15px;
 	}
 
-	.ico {
+	.material-icons {
 		color: $white;
 		top: 14px;
 

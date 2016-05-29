@@ -225,24 +225,23 @@ p.error-inline {
 
 .more-options {
 	float: left;
-	font: 12px "Roboto Medium";
-	padding: 10px 10px 10px 0;
+	font: 14px/54px "Roboto Regular";
 
 	&:hover {
 		text-decoration: none;
 
-		.ico:before {
+		.material-icons:before {
 			color: darken($linkBlue, 20%);
 		}
 	}
 
-	.ico {
+	.material-icons {
 		left: 0 !important;
 		position: relative !important;
 		top: 0;
 	}
 
-	.ico:before {
+	.material-icons:before {
 		color: $linkBlue;
 		font-size: 12px !important;
 		padding: 0;
@@ -267,7 +266,7 @@ p.error-inline {
 		position: static;
 	}
 
-	.ico {
+	.material-icons {
 		box-shadow: $boxShadow;
 		border-radius: 4px;
 		box-sizing: border-box;
@@ -321,17 +320,12 @@ p.error-inline {
 
 // Icons
 
-.ico {
+.material-icons {
 	@include transition(color, ease-in-out, 0.1s);
 	color: $grayIcon;
-	font: normal 16px/1 "QB Icons";
-	font-style: normal;
-	font-variant: normal;
-	opacity: 1;
 	left: 16px;
 	position: absolute;
 	top: 0;
-	text-transform: none;
 
 	// better font rendering
 	-webkit-font-smoothing: antialiased;
@@ -508,16 +502,16 @@ p.error-inline {
 	}
 }
 
-button.ico {
+button.material-icons {
 	background: none;
 	border: 0;
 	font-size: 0;
 }
 
-form .ico {
+form .material-icons {
 	left: auto;
 	right: 15px;
-	top: 18px;
+	top: 15px;
 
 	&:before {
 		font-size: 16px;

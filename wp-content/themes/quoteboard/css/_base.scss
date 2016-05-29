@@ -150,19 +150,19 @@ textarea {
 	background: $offWhite;
 	border: 0;
 	border-radius: 4px;
-	box-shadow: $boxShadowInset;
 	box-sizing: border-box;
 	color: $black;
 	font: 16px "Roboto Regular", sans-serif;
 	margin: 0;
+	outline: none;
 	padding: 16px;
 	width: 100%;
 
-	&:focus + .ico {
+	&:focus + .material-icons {
 		color: darken($grayIcon, 25%);
 	}
 
-	&:focus + .ico.error {
+	&:focus + .material-icons.error {
 		color: $errorText;
 	}
 

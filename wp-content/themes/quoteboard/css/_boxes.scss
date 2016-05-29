@@ -169,12 +169,12 @@
 			display: none;
 		}
 
-		.ico {
+		.material-icons {
 			left: auto;
 			position: absolute;
 		}
 
-		.ico:before {
+		.material-icons:before {
 			font-size: 16px;
 		}
 	}
@@ -182,7 +182,7 @@
 
 	// Icons
 
-	.ico {
+	.material-icons {
 		left: 0;
 		position: relative;
 
@@ -228,9 +228,11 @@
 /** Time Since Posted, Comment Count */
 
 .box-meta {
-	color: $grayHandle;
+	color: $grayIcon;
 	float: right;
 	font-size: 12px;
+	margin-right: 10px;
+	margin-top: -35px;
 }
 
 
@@ -401,7 +403,7 @@
 		width: 60px;
 	}
 
-	.box .ico:before {
+	.box .material-icons:before {
 		font-size: 24px;
 	}
 

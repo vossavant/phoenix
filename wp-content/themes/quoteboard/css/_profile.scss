@@ -84,12 +84,12 @@
 			margin: 0;
 		}
 
-		.ico {
+		.material-icons {
 			padding-right: 2px;
 			position: static;
 		}
 
-		.ico:before {
+		.material-icons:before {
 			font-size: 14px;
 			padding: 0;
 		}
@@ -297,7 +297,7 @@
 		width: 150px;
 	}
 
-	.ico {
+	.material-icons {
 		padding: 0;
 
 		&:before {

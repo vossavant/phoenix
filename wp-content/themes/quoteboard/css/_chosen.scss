@@ -236,62 +236,46 @@
 
 /* @end */
 /* @group Multi Chosen */
-.chosen-container-multi .chosen-choices {
+.chosen-container-multi {
 	background: $offWhite;
 	border: 0;
 	border-radius: 4px;
-	box-shadow: $boxShadowInset;
 	box-sizing: border-box;
 	color: $black;
 	cursor: text;
 	font: 16px "Roboto Regular", sans-serif;
 	margin: 0;
-	padding: 16px;
+	min-height: 54px;
 	position: relative;
-	width: 100%;
-
-	&:focus,
-	&:active {
-		background: $white;
-	}
 }
 .chosen-container-multi .chosen-choices li {
 float: left;
 list-style: none;
 }
 .chosen-container-multi .chosen-choices li.search-field {
-margin: 0;
-padding: 0;
-white-space: nowrap;
+	margin: 0;
+	padding: 0;
+	white-space: nowrap;
 }
 .chosen-container-multi .chosen-choices li.search-field .default {
-	box-shadow: none;
 	color: #a9a9b0;
-	padding: 0;
-	width: auto !important;
+	padding: 16px;
+	width: 100% !important;
 }
 .chosen-container-multi .chosen-choices li.search-choice {
-position: relative;
-margin: 3px 0 3px 5px;
-padding: 3px 20px 3px 5px;
-border: 1px solid #aaa;
-border-radius: 3px;
-background-color: #e4e4e4;
-background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eeeeee));
-background-image: -webkit-linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-background-image: -moz-linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-background-image: -o-linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
-background-clip: padding-box;
-box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
-color: #333;
-line-height: 13px;
-cursor: default;
+	border-radius: 4px;
+	background-color: #a9a9a9;
+	background-clip: padding-box;
+	color: $white;
+	cursor: default;
+	margin: 5px 0 0 5px;
+	padding: 10px 30px 11px 10px;
+	position: relative;
 }
 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
 position: absolute;
-top: 4px;
-right: 3px;
+top: 16px;
+right: 10px;
 display: block;
 width: 12px;
 height: 12px;
@@ -354,12 +338,13 @@ background: transparent;
 .chosen-container-active.chosen-with-drop .chosen-single div b {
 background-position: -20px 15px;
 }
-.chosen-container-active .chosen-choices {
-border: 1px solid #5897fb;
-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-}
+//.chosen-container-active .chosen-choices {
+//border: 1px solid #5897fb;
+//box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+//}
 .chosen-container-active .chosen-choices li.search-field input[type="text"] {
-color: #111 !important;
+	background: none;
+	color: #111 !important;
 }
 
 /* @end */
