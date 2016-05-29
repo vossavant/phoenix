@@ -29,6 +29,12 @@ if ( empty( $quote_text_hashed ) ) {
 	exit;
 }
 
+// check for duplicate
+if ($existing_quote_text = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE REPLACE(post_content, '#', '') LIKE '%$quote_text_hashed%' AND post_status = 'publish' AND post_type = 'quote'")) {
+	echo json_encode(array('notice' => 'Duplicate quote matches existing #' . $existing_quote_text));
+	exit;
+}
+
 // if no board specified, assign to default board
 if ( empty( $quote_board ) ) {
 	$quote_board = $wpdb->get_var( "SELECT post_id FROM $wpdb->postmeta JOIN $wpdb->posts ON post_id = ID WHERE meta_key = 'is_default' AND meta_value = 'yes' AND post_author = '$current_user_id'" );
@@ -176,10 +182,10 @@ foreach ( $hashtags[0] as $key => $tag ) {
 $quote_tags = implode( ',', $quote_hashtags );
 
 // strip hashes from quote
-$quote_text_hashless = truncate( str_replace( '#', '', $quote_text_hashed ), 750 );
+$quote_text_hashless = truncate( str_replace( '#', '', $quote_text_hashed ), 1000 );
 
 // keep hashes in quote
-$quote_text = truncate( $quote_text_hashed, 750 );
+$quote_text = truncate( $quote_text_hashed, 1000 );
 
 // assign other necessary fields
 $quote_title 	= truncate( str_replace( "\n", ' ', $quote_text_hashless ), 72 );
