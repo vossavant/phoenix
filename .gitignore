@@ -18,9 +18,15 @@ wp-content/plugins/hello.php
 
 
 wp-content/themes/quoteboard/config.codekit
-
+wp-content/themes/quoteboard/css/.sass-cache/
 *.codekit
-
-*.codekit
-
 *.scssc
+*.xml
+*.iml
+wp-content/themes/quoteboard/css/.sass-cache/9a44577134616f0e7c141749fbe776fafb4f14c2/_profile.scssc
+
+wp-content/themes/quoteboard/css/.sass-cache/9a44577134616f0e7c141749fbe776fafb4f14c2/_profile.scssc
+
+wp-content/themes/quoteboard/css/.sass-cache/9a44577134616f0e7c141749fbe776fafb4f14c2/_profile.scssc
+
+wp-content/themes/quoteboard/css/.sass-cache/9a44577134616f0e7c141749fbe776fafb4f14c2/_profile.scssc
