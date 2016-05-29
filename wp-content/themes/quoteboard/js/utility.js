@@ -1305,7 +1305,7 @@
 					extraFields.slideUp(function() {
 						//$.fancybox.reposition();
 					});
-					$('span:first-child', this).text('Add more details');
+					$('span:first-child', this).text('Add more details...');
 					$('.ico', this).removeClass('arrow-up').addClass('arrow-down');
 				} else {
 					extraFields.slideDown(function() {
@@ -2109,7 +2109,7 @@
 			form.find('.charcount span').text(qb.quoteLimit);
 			form.find('.form-options').find('.ico').removeClass('arrow-up').addClass('arrow-down');
 			form.find('.extra-fields').slideUp();
-			form.find('.more-options').find('span:first-child').text('Add more details');
+			form.find('.more-options').find('span:first-child').text('Add more details...');
 
 			// update submit button
 			submitButton.removeClass('updated').removeAttr('disabled').text( buttonText );
