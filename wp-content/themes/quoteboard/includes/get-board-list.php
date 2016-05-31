@@ -23,9 +23,12 @@ $query =
 	AND post_type = 'board'
 	ORDER BY post_title";
 
-$board_list = '
-<select data-placeholder="Post to which boards?" multiple name="quote_boards[]">
-	<option value=""></option>
+if ( !$which_boards = unserialize($wpdb->get_var("SELECT meta_value FROM $wpdb->postmeta WHERE post_id = $post->ID AND meta_key = 'quote_board'")) ) {
+	$which_boards = array();
+}
+
+$board_list =
+'<select data-placeholder="Post to which boards?" multiple name="quote_boards[]">
 	<option value="">&mdash; Create New Board &mdash;</option>';
 
 	// see: http://www.advancedcustomfields.com/resources/tutorials/querying-the-database-for-repeater-sub-field-values/
@@ -35,7 +38,7 @@ $board_list = '
 			$meta_key = 'board_members_' . $matches[0] . '_can_collaborate';
 			
 			if ( get_post_meta( $board->post_id, $meta_key, true ) == 'y' ) {
-				$board_list .= '<option class="' . ( $board->post_status == 'private' ? 'private' : '' ) . '" value="' . $board->post_id . '">' . $board->post_title . '</option>';
+				$board_list .= '<option class="' . ( $board->post_status == 'private' ? 'private' : '' ) . '"' . (in_array($board->post_id, $which_boards) ? ' selected' : '') . ' value="' . $board->post_id . '">' . $board->post_title . '</option>';
 			}
 		}
 	}

@@ -51,6 +51,9 @@ $update_parameters = array(
 // update the quote slug
 $quote_updated	= wp_update_post( $update_parameters );
 
+// serialize board IDs
+$quote_boards = serialize($quote_boards);
+
 // update custom fields
 if ( $quote_updated ) {
 
@@ -63,7 +66,7 @@ if ( $quote_updated ) {
 	add_post_meta( $quote_added_id, 'quote_source', $quote_sourced_to_id );
 	add_post_meta( $quote_added_id, '_quote_source', 'field_507658884b202' );
 	
-	add_post_meta( $quote_added_id, 'quote_board', $quote_board );
+	add_post_meta( $quote_added_id, 'quote_board', $quote_boards );
 	add_post_meta( $quote_added_id, '_quote_board', 'field_5077ae14b09b9' );
 
 	add_post_meta( $quote_added_id, 'quote_link', $quote_source_info );
@@ -74,7 +77,7 @@ if ( $quote_updated ) {
 		array(
 			'added_by'	=> $current_user_id,
 			'author_id' => $quote_attributed_to_id,
-			'board_id'	=> $quote_board,
+			'board_id'	=> $quote_boards,
 			'quote_id'	=> $quote_added_id,
 			'home_url'	=> home_url(),
 			'avatar'	=> get_wp_user_avatar( $current_user_id, 80 ),
@@ -83,7 +86,7 @@ if ( $quote_updated ) {
 			'datetime'	=> date('c'),
 			'quote'		=> wp_unslash( nl2br( $quote_text_hashless ) ),
 			'privacy'	=> $quote_status,
-			'permalink'	=> '<a href="' . get_the_permalink( $quote_board ) . '">' . get_the_title( $quote_board ) . '</a>',
+			'permalink'	=> '<a href="' . get_the_permalink( $quote_boards ) . '">' . get_the_title( $quote_boards ) . '</a>',
 		)
 	);
 
@@ -107,7 +110,7 @@ echo json_encode(
 		'hashed quote' => $quote_text_hashed,
 		'attributed to' => $quote_attributed_to,
 		'attributed to ID' => $quote_attributed_to_id,
-		'board id' => $quote_board,
+		'board id' => $quote_boards,
 		'current user' => $current_user_id,
 		'hashtags' => $quote_hashtags,
 		'tags' => $quote_tags,

@@ -18,10 +18,12 @@ $quote_source_info 		= wp_unslash( sanitize_text_field( $_POST['quote_source_inf
 $quote_attributed_to_id	= absint( $_POST['quote_author_id'] );
 $quote_character_id		= absint( $_POST['quote_character_id'] );
 $quote_sourced_to_id	= absint( $_POST['quote_source_id'] );
-$quote_board 			= absint( $_POST['quote_board'] );
+$quote_boards 			= is_array($_POST['quote_boards']) ? array_filter($_POST['quote_boards']) : null;
+$quote_status           = 'publish';
 $quote_hashtags 		= array();
 $current_user_id 		= get_current_user_id();
 $source_added_id		= '';
+$form_name              = sanitize_text_field($_POST['form_name']);
 
 // check for required fields
 if ( empty( $quote_text_hashed ) ) {
@@ -30,34 +32,41 @@ if ( empty( $quote_text_hashed ) ) {
 }
 
 // check for duplicate
-if ($existing_quote_text = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE REPLACE(post_content, '#', '') LIKE '%$quote_text_hashed%' AND post_status = 'publish' AND post_type = 'quote'")) {
-	echo json_encode(array('notice' => 'Duplicate quote matches existing #' . $existing_quote_text));
-	exit;
-}
-
-// if no board specified, assign to default board
-if ( empty( $quote_board ) ) {
-	$quote_board = $wpdb->get_var( "SELECT post_id FROM $wpdb->postmeta JOIN $wpdb->posts ON post_id = ID WHERE meta_key = 'is_default' AND meta_value = 'yes' AND post_author = '$current_user_id'" );
-
-// make sure user can collaborate on the chosen board
-} else {
-	foreach ( $members = get_field( 'board_members', $quote_board ) as $member ) {
-		if ( $member['board_members_user']['ID'] == $current_user_id ) {
-			if ( $member['can_collaborate'] != 'y' ) {
-				echo json_encode( array( 'errors' => 'You are not allowed to post quotes to this board' ) );
-				exit;
-			} else {
-				break;
-			}
-		}
+if ($form_name != 'edit-quote') {
+	if ($existing_quote_text = $wpdb->get_var("SELECT ID FROM $wpdb->posts WHERE REPLACE(post_content, '#', '') LIKE '%$quote_text_hashed%' AND post_status = 'publish' AND post_type = 'quote'")) {
+		echo json_encode(array('notice' => 'Duplicate quote matches existing #' . $existing_quote_text));
+		exit;
 	}
 }
 
-// if adding or moving quote to a public board, make sure quote privacy is set to publish
-if ( get_post_status( $quote_board ) == 'private' ) {
-	$quote_status = 'private';
+// if no board specified, assign to default board (Unsorted Quotes)
+if ( empty( $quote_boards ) ) {
+	$quote_boards = array($wpdb->get_var("SELECT post_id FROM $wpdb->postmeta JOIN $wpdb->posts ON post_id = ID WHERE meta_key = 'is_default' AND meta_value = 'yes' AND post_author = " . SUPERADMIN_USER_ID));
+	
+// make sure user can collaborate on the chosen board
+// NOTE: disabling this check b/c only admins can add quotes (for now)
+//} else {
+//	foreach ( $members = get_field( 'board_members', $quote_boards ) as $member ) {
+//		if ( $member['board_members_user']['ID'] == $current_user_id ) {
+//			if ( $member['can_collaborate'] != 'y' ) {
+//				echo json_encode( array( 'errors' => 'You are not allowed to post quotes to this board' ) );
+//				exit;
+//			} else {
+//				break;
+//			}
+//		}
+//	}
 } else {
-	$quote_status = 'publish';
+
+	// if quote added to even one private board, make private
+	// NOTE: so long as admins are adding quotes, this is likely never going to happen - quotes will either always be added to only public boards,
+	// or they will only be added to a single private board
+	foreach ($quote_boards as $board) {
+		if (get_post_status($board) == 'private') {
+			$quote_status = 'private';
+			break;
+		}
+	}
 }
 
 // if "who said it" field blank, assign to "Anonymous"

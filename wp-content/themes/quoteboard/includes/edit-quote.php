@@ -70,7 +70,7 @@ if ( $quote_updated_id ) {
 		update_post_meta( $quote_updated_id, '_quote_source', 'field_507658884b202' );
 	}
 
-	update_post_meta( $quote_updated_id, 'quote_board', $quote_board );
+	update_post_meta( $quote_updated_id, 'quote_board', $quote_boards );
 	update_post_meta( $quote_updated_id, '_quote_board', 'field_5077ae14b09b9' );
 
 	// replace hashtags with links
@@ -84,14 +84,14 @@ if ( $quote_updated_id ) {
 	$quote_source = '<a href="' . get_permalink( $quote_sourced_to_id ) . '" title="See quotes from ' . $quote_source . '">' . $quote_source . '</a>';
 
 	// board image and link
-	if ( has_post_thumbnail( $quote_board ) ) {
-		$board_thumbnail		= wp_get_attachment_image_src( get_post_thumbnail_id( $quote_board ), 'full' );
+	if ( has_post_thumbnail( $quote_boards ) ) {
+		$board_thumbnail		= wp_get_attachment_image_src( get_post_thumbnail_id( $quote_boards ), 'full' );
 		$board_thumbnail_src	= $board_thumbnail[0];
 	} else {
 		$board_thumbnail_src	= get_field( 'default_thumbnail', 'option' );
 	}
 
-	$quote_board_img = '<a href="' . get_permalink( $quote_board ) . '"><img src="' . TIMTHUMB_PATH . $board_thumbnail_src . '&w=48&h=48" alt="' . get_the_title( $quote_board ) . '" />' . get_the_title( $quote_board ) . '</a>';
+	$quote_boards_img = '<a href="' . get_permalink( $quote_boards ) . '"><img src="' . TIMTHUMB_PATH . $board_thumbnail_src . '&w=48&h=48" alt="' . get_the_title( $quote_boards ) . '" />' . get_the_title( $quote_boards ) . '</a>';
 
 	// return params for jQuery
 	echo json_encode(
@@ -101,8 +101,8 @@ if ( $quote_updated_id ) {
 			'quote_author'		=> $quote_attributed_to,
 			'quote_author_id'	=> $quote_attributed_to_id,
 			'quote_source'		=> $quote_source,
-			'quote_board_id'	=> $quote_board,
-			'quote_board_img'	=> $quote_board_img,
+			'quote_board_id'	=> serialize($quote_boards),
+			'quote_board_img'	=> $quote_boards_img,
 			'quote_status'		=> $quote_status
 		)
 	);

@@ -68,29 +68,15 @@ if ( have_posts() ) : while ( have_posts() ) : the_post();
 		/**
 		 *	Boards
 		 */
-		echo '
-		<section class="boards box">
-			<div class="bubble">
-				<h4>Boards</h4>
-				<ul>';
-					// show original board
-					$post = get_field('quote_board');
-					setup_postdata( $post );
-					get_template_part( 'includes/get-board' );
-					wp_reset_postdata();
-
-					// show requoted boards
-					if ( $boards = get_field( 'requoted_to' ) ) {
-						foreach ( $boards as $post ):
-							setup_postdata( $post );
-							get_template_part( 'includes/get-board' );
-						endforeach;
-						wp_reset_postdata();
-					}
-					echo '
-				</ul>
-			</div>
-		</section>';
+		if ($posts = get_field('quote_board')) {
+			echo '<section class="boards box"><div class="bubble"><h4>Boards</h4><ul>';
+			foreach ($posts as $post) {
+				setup_postdata($post);
+				get_template_part('includes/get-board');
+				wp_reset_postdata();
+			}
+			echo '</ul></div></section>';
+		}
 
 
 		/**
