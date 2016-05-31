@@ -219,9 +219,10 @@ p.error-inline {
     .more-options:hover .material-icons:before {
       color: #005076; }
   .more-options .material-icons {
-    left: 0 !important;
-    position: relative !important;
-    top: 0; }
+    color: #0095dc;
+    left: 0;
+    position: relative;
+    top: 7px; }
   .more-options .material-icons:before {
     color: #0095dc;
     font-size: 12px !important;
@@ -406,6 +407,20 @@ form .material-icons {
 
 .pagenum {
   margin-top: 20px; }
+
+.search-form button {
+  background: none;
+  border: 0;
+  font-size: 0;
+  padding: 0;
+  width: auto; }
+  .search-form button .material-icons {
+    color: #ebc7d6;
+    cursor: pointer;
+    padding: 8px;
+    position: absolute;
+    right: 12px;
+    top: 10px; }
 
 /** General Selectors */
 a {
@@ -1214,9 +1229,10 @@ body > footer {
 .box-meta, .pagenum, .box.quote time, #comment-list time {
   color: #c7c7c7;
   float: right;
-  font-size: 12px;
-  margin-right: 10px;
-  margin-top: -35px; }
+  font-size: 12px; }
+  .box-meta.charcount, .charcount.pagenum, .box.quote time.charcount, #comment-list time.charcount {
+    margin-right: 10px;
+    margin-top: -35px; }
 
 /** Quote Box Styles */
 .box.quote.new .bubble, .box.quote.new .box.quote > div > div {

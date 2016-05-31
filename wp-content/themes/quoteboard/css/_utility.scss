@@ -236,9 +236,10 @@ p.error-inline {
 	}
 
 	.material-icons {
-		left: 0 !important;
-		position: relative !important;
-		top: 0;
+		color: $linkBlue;
+		left: 0;
+		position: relative;
+		top: 7px;
 	}
 
 	.material-icons:before {
@@ -562,4 +563,21 @@ form .material-icons {
 .pagenum {
 	@extend .box-meta;
 	margin-top: 20px;
+}
+
+.search-form button {
+	background: none;
+	border: 0;
+	font-size: 0;
+	padding: 0;
+	width: auto;
+
+	.material-icons {
+		color: #ebc7d6;
+		cursor: pointer;
+		padding: 8px;
+		position: absolute;
+		right: 12px;
+		top: 10px;
+	}
 }
