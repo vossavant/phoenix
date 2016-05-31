@@ -54,7 +54,7 @@
 		</div>
 
 		<div class="flex vertical-align">
-			<a class="more-options" href="#"><span>Add more details...</span> <span class="ico arrow-down"></span></a>
+			<a class="more-options" href="#"><span>Add more details</span> <i class="material-icons">keyboard_arrow_down</i></a>
 			<input name="form_name" type="hidden" value="add-quote" />
 			<button class="btn" type="submit">Add Quote &raquo;</button>
 		</div>
