@@ -25,11 +25,11 @@ if ( url_segment( 4 ) ) { // TO DO: this needs to be set to "4" on the live site
 // doing it this way vs get_header() gives header access to all variables
 include( TEMPLATEPATH . '/header.php' );
 
+$current_user_is_board_author = false;
+$board_ids = null;
+
 if ( have_posts() ) :
 	while ( have_posts() ) : the_post();
-
-		// grab board ID for later use
-		$board_id		= get_the_ID();
 
 		// store permalink for efficiency
 		$permalink 		= get_permalink();
@@ -51,8 +51,6 @@ if ( have_posts() ) :
 		// cache result, since we do this check a few times
 		if ( $current_user->ID == $board_author ) {
 			$current_user_is_board_author = true;
-		} else {
-			$current_user_is_board_author = false;
 		}
 
 		if ( has_post_thumbnail() ) {
@@ -101,7 +99,7 @@ elseif ( isset( $wp_query->query_vars['profile'] ) ) {
 					echo '<p class="message warning shown"><strong>This is a private board.</strong> You cannot view quotes on a private board, even as an admin.</p>';
 				}
 
-				/*
+				/**
 				 *	Grab quotes related to (on) the current board
 				 *	we store the results here so we can count them (for the #quotes stat)
 				 *	and then use the query later. this is better than running a query here
@@ -120,7 +118,7 @@ elseif ( isset( $wp_query->query_vars['profile'] ) ) {
 						'meta_query'	=> array (
 							array (
 								'key' 	=> 'quote_board',
-								'value' => $board_id
+								'value' => 533 //unserialize($board_ids)    // TODO: need to search serialized data for the board ID - if in the serialized data, then grab the quote
 							)
 						)
 					)
