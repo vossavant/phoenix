@@ -23,20 +23,20 @@ if ( stristr( home_url(), 'localhost') ) {
 }
 
 // define constants
-define( IS_SANDBOX, $is_sandbox );
-define( SUPERADMIN_USER_ID, 2 );
-define( DEFAULT_THUMBNAIL_URL, get_field( 'default_thumbnail', 'option' ) );
-define( DEFAULT_BACKGROUND, get_field( 'default_background', 'option' ) );
-define( DEFAULT_PAGE_BACKGROUND, get_field( 'default_site_background', 'option' ) );
-define( DEFAULT_THUMBNAIL_ID, qb_get_attachment_id_by_url( DEFAULT_THUMBNAIL_URL ) );
-define( DEFAULT_BACKGROUND_ID, qb_get_attachment_id_by_url( DEFAULT_BACKGROUND ) );
-define( MINIMUM_PASSWORD_LENGTH, 6 );
-define( MINIMUM_USERNAME_LENGTH, 4 );
-define( TIMTHUMB_PATH, get_bloginfo( 'template_url' ) . '/includes/timthumb.php?src=' );
-define( TERMS_PAGE_ID, 74);
-define( RESULTS_PER_PAGE, 20);
-define( GOOGLE_CSE_ID, '010552372868030502357:om3c3sh6jmw' );
-define( GOOGLE_API_KEY, 'AIzaSyDF4c90Y32LWHCTsO5OAWxhgm5wYCF-GOA' );
+define( 'IS_SANDBOX', $is_sandbox );
+define( 'SUPERADMIN_USER_ID', 2 );
+define( 'DEFAULT_THUMBNAIL_URL', get_field( 'default_thumbnail', 'option' ) );
+define( 'DEFAULT_BACKGROUND', get_field( 'default_background', 'option' ) );
+define( 'DEFAULT_PAGE_BACKGROUND', get_field( 'default_site_background', 'option' ) );
+define( 'DEFAULT_THUMBNAIL_ID', qb_get_attachment_id_by_url( DEFAULT_THUMBNAIL_URL ) );
+define( 'DEFAULT_BACKGROUND_ID', qb_get_attachment_id_by_url( DEFAULT_BACKGROUND ) );
+define( 'MINIMUM_PASSWORD_LENGTH', 6 );
+define( 'MINIMUM_USERNAME_LENGTH', 4 );
+define( 'TIMTHUMB_PATH', get_bloginfo( 'template_url' ) . '/includes/timthumb.php?src=' );
+define( 'TERMS_PAGE_ID', 74);
+define( 'RESULTS_PER_PAGE', 20);
+define( 'GOOGLE_CSE_ID', '010552372868030502357:om3c3sh6jmw' );
+define( 'GOOGLE_API_KEY', 'AIzaSyDF4c90Y32LWHCTsO5OAWxhgm5wYCF-GOA' );
 
 // set default timezone
 date_default_timezone_set( 'America/Denver' );
