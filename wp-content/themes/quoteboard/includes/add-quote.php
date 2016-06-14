@@ -5,8 +5,6 @@
  *
  *	Adds a new quote. Loaded when a user clicks the "New Quote" button.
  */
-echo json_encode(array('boards' => $_POST['quote_boards']));
-exit;
 
 if ($_POST['is_scrape']) {
 	require_once( '../../../../wp-load.php' );
@@ -51,8 +49,11 @@ $update_parameters = array(
 // update the quote slug
 $quote_updated	= wp_update_post( $update_parameters );
 
-// serialize board IDs
-$quote_boards = serialize($quote_boards);
+// create permalink list
+$quote_board_permalink = '';
+foreach ($quote_boards as $board) {
+	$quote_board_permalink .= '<a href="' . get_the_permalink($board) . '">' . get_the_title($board) . '</a>';
+}
 
 // update custom fields
 if ( $quote_updated ) {
@@ -86,7 +87,7 @@ if ( $quote_updated ) {
 			'datetime'	=> date('c'),
 			'quote'		=> wp_unslash( nl2br( $quote_text_hashless ) ),
 			'privacy'	=> $quote_status,
-			'permalink'	=> '<a href="' . get_the_permalink( $quote_boards ) . '">' . get_the_title( $quote_boards ) . '</a>',
+			'permalink'	=> $quote_board_permalink
 		)
 	);
 
