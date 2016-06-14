@@ -77,6 +77,13 @@
   .flex .flex-33 {
     width: 33.334%; }
 
+.vertical-align {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+              -ms-grid-row-align: center;
+          align-items: center; }
+
 .clearfix:before,
 .clearfix:after {
   content: " ";
@@ -2212,6 +2219,10 @@ ul.tabnav {
     .fancybox-inner h2 span:before {
       font-size: 34px;
       padding: 0; }
+    .fancybox-inner h2 .material-icons {
+      cursor: pointer; }
+      .fancybox-inner h2 .material-icons:hover {
+        color: #0f0f0f; }
   .fancybox-inner h4 {
     font: normal 18px/24px "Roboto Medium"; }
   .fancybox-inner img.thumb {

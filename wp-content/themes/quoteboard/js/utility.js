@@ -1125,7 +1125,7 @@
 			} );
 
 			// close fancyboxes (ignore when closing the "Add Board" on-the-fly form launched from the "Add Quote" fancybox)
-			$( 'body' ).on( 'click', '.close', function() {
+			$( 'body' ).on( 'click', '.fancybox-inner h2 .material-icons', function() {
 				//if ( $( this ).closest( 'form' ).attr( 'id' ) !== 'board-create-new-inline' ) {
 					$.fancybox.close();
 				//}
